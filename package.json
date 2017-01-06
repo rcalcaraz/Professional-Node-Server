@@ -4,6 +4,7 @@
   "description": "Basic MEAN architecture with Mongoose and ui-router",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/rcalcaraz/mean-basic/issues"
   },
-  "homepage": "https://github.com/rcalcaraz/mean-basic#readme"
+  "homepage": "https://github.com/rcalcaraz/mean-basic#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.7.6"
+  }
 }
