@@ -2,7 +2,6 @@
 
 /* TODO
 mocha
-static files
 path
 */
 
@@ -15,27 +14,28 @@ var morgan = require('morgan');
 var app = express();
 
 // Server configuration
-app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ 'extended': 'true' })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
-app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 app.use(morgan('dev')); // log every request to the console
+app.use(express.static('client'));
 
 // Database connection
 var db = require('./server/config/database.js')(mongoose);
 
-// Rest routes
+// REST routes
 require('./server/routes/car.js')(app);
 
 // Routing
-app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/client/index.html');
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + '/client/index.html');
 });
 
 // Launcher
 var port = process.env.ND_PORT;
 
-app.listen(port, function () {
-  console.log('==== Basic Server for MEAN stack started ====');
-  console.log("Listening on port: " + port);
+app.listen(port, function() {
+    console.log('==== Basic Server for MEAN stack started ====');
+    console.log("Listening on port: " + port);
 });
