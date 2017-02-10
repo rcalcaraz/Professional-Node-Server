@@ -1,20 +1,25 @@
 // Load variables and packages
 
 /* TODO
-Morgan
-Body Parser
-.env
 mocha
 static files
 path
-winston
-refactor
-guia estilo rest
 */
 
+require('dotenv').config();
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var morgan = require('morgan');
 var app = express();
+
+// Server configuration
+app.use(bodyParser.urlencoded({'extended': 'true'})); // parse application/x-www-form-urlencoded
+app.use(bodyParser.json()); // parse application/json
+app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
+app.use(methodOverride());
+app.use(morgan('dev')); // log every request to the console
 
 // Database connection
 var db = require('./server/config/database.js')(mongoose);
@@ -23,13 +28,14 @@ var db = require('./server/config/database.js')(mongoose);
 require('./server/routes/car.js')(app);
 
 // Routing
-
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/client/index.html');
 });
 
 // Launcher
-app.listen(3000, function () {
+var port = process.env.ND_PORT;
+
+app.listen(port, function () {
   console.log('==== Basic Server for MEAN stack started ====');
-  console.log("Listening on port: 3000");
+  console.log("Listening on port: " + port);
 });
