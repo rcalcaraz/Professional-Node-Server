@@ -4,10 +4,9 @@
   "description": "Basic Node REST API with Express",
   "main": "app.js",
   "scripts": {
-    "dev-start": "node app.js",
     "start": "pm2 start app.js",
     "stop": "pm2 stop app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -33,10 +32,13 @@
     "express": "^4.14.0",
     "method-override": "^2.3.7",
     "mongoose": "^4.7.6",
+    "mongoose-unique-validator": "^1.0.3",
     "morgan": "^1.8.0",
     "pm2": "^2.4.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "mocha": "^3.2.0"
   }
 }

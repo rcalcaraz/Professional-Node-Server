@@ -13,8 +13,4 @@ module.exports = function(mongoose) {
     db.on('error', function() {
         console.log("DB Connection error");
     });
-
-    db.on('open', function() {
-        console.log("DB Connection OK");
-    });
 };

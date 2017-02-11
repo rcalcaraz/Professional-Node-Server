@@ -7,8 +7,6 @@ module.exports = {
         carDAO.getAll(function(err, cars) {
             if (err) {
                 res.status(500).json();
-            } else if (cars.length == 0) {
-                res.status(404).json();
             } else {
                 res.status(200).json(cars);
             }
@@ -25,7 +23,11 @@ module.exports = {
 
         carDAO.save(newCar, function(err, car) {
             if (err) {
-                res.status(500).json();
+                if (err.name == "ValidationError") {
+                    res.status(409).json();
+                } else {
+                    res.status(500).json();
+                }
             } else {
                 res.status(201).json(car);
             }
@@ -53,6 +55,8 @@ module.exports = {
             if (err) {
                 if (err.name == "CastError") {
                     res.status(404).json();
+                } else if (err.name = "ValidationError") {
+                    res.status(409).json();
                 } else {
                     res.status(500).json();
                 }

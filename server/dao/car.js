@@ -23,7 +23,7 @@ module.exports = {
 
     update: function(id, updatedCar, callback) {
         updatedCar._id = id;
-        Car.findByIdAndUpdate(id, updatedCar, { new: true }, function(err, updatedCar) {
+        Car.findByIdAndUpdate(id, updatedCar, { new: true, runValidators: true, context: 'query' }, function(err, updatedCar) {
             callback(err, updatedCar);
         });
     },
