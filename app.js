@@ -1,7 +1,8 @@
 // Load variables and packages
 
 /* TODO
-mocha
+mocha (Check test database)
+jsonwebtokens
 */
 
 require('dotenv').config();
@@ -33,9 +34,10 @@ app.get('/', function(req, res) {
 });
 
 // Launcher
-var port = process.env.ND_PORT;
+var port = process.env.NODE_PORT;
 
 app.listen(port, function() {
     console.log("Listening on port: " + port);
-    module.exports = app; // for testing
 });
+
+module.exports = app; // for testing

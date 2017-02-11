@@ -21,12 +21,25 @@ describe('[Cars TEST]', function() {
 
     describe('/GET cars', function() {
         it('it should GET all the cars', function(done) {
-            chai.request('localhost:3000')
+            chai.request(server)
                 .get('/cars')
                 .end(function(err, res) {
                     res.should.have.status(200);
                     res.body.should.be.a('array');
                     res.body.length.should.be.eql(0);
+                    done();
+                });
+        });
+    });
+
+    describe('/POST car', function() {
+        it('it should not POST a car without name field', function(done) {
+            var car = {}
+            chai.request(server)
+                .post('/car')
+                .send(car)
+                .end(function(err, res) {
+                    res.should.have.status(400);
                     done();
                 });
         });
