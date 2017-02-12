@@ -77,7 +77,7 @@ module.exports = {
             } else if (!deletedCar) {
                 res.status(404).json();
             } else {
-                res.status(200).json();
+                res.status(200).json(deletedCar);
             }
         });
     }
