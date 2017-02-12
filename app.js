@@ -1,7 +1,6 @@
 // Load variables and packages
 
 /* TODO
-mocha (Check test database)
 jsonwebtokens
 */
 
