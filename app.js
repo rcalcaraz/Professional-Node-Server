@@ -18,8 +18,9 @@ app.use(morgan('dev')); // log every request to the console
 var db = require('./server/config/database.js')(mongoose);
 
 // Rest routes
-require('./server/routes/car.js')(app);
 require('./server/routes/user.js')(app);
+require('./server/routes/car.js')(app);
+require('./server/routes/session')(app);
 
 // Routing
 app.get('/', function(req, res) {
