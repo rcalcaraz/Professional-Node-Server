@@ -1,9 +1,5 @@
 // Load variables and packages
 
-/* TODO
-jsonwebtokens
-*/
-
 require('dotenv').config();
 var express = require('express');
 var mongoose = require('mongoose');
@@ -28,7 +24,9 @@ if (process.env.NODE_ENV !== 'test') {
 var db = require('./server/config/database.js')(mongoose);
 
 // REST routes
+require('./server/routes/user.js')(app);
 require('./server/routes/car.js')(app);
+require('./server/routes/session')(app);
 
 // Routing
 app.get('/', function(req, res) {
@@ -38,7 +36,7 @@ app.get('/', function(req, res) {
 // Launcher
 var port = process.env.NODE_PORT;
 
-app.listen(port, function() {
+app.listen(port, function() { <<
     console.log("Listening on port: " + port);
 });
 
