@@ -6,8 +6,7 @@ module.exports = {
     getCars: function(req, res) {
         carDAO.getAll(function(err, cars) {
             if (err) {
-                res.status(500).json(); <<
-                << << < HEAD
+                res.status(500).json();
             } else {
                 res.status(200).json(cars);
             }

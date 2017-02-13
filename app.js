@@ -1,5 +1,6 @@
-// Load variables and packages
+// TODO: Change tests to add jsonwebtokens or change middleware for tests
 
+// Load variables and packages
 require('dotenv').config();
 var express = require('express');
 var mongoose = require('mongoose');
@@ -36,7 +37,7 @@ app.get('/', function(req, res) {
 // Launcher
 var port = process.env.NODE_PORT;
 
-app.listen(port, function() { <<
+app.listen(port, function() {
     console.log("Listening on port: " + port);
 });
 
