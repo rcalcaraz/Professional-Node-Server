@@ -1,8 +1,16 @@
 var jwt = require('jsonwebtoken');
 
-// TODO: Crearte middleware to check if user is admin
-
 module.exports = {
+
+    isAdmin: function(req, res, next) {
+        console.log(req);
+        if (req.decoded.user.role.localeCompare('admin') == 0) {
+            next();
+        } else {
+            return res.status(403).json();
+        }
+    },
+
     jwtVerify: function(req, res, next) {
         var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
