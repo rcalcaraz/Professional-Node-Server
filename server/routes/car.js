@@ -4,10 +4,9 @@ var secutiry = require('../config/secutiry.js');
 module.exports = function(app) {
     app.route("/cars")
         // .get(secutiry.jwtVerify, carRest.getCars);
-        .get(carRest.getCars);
-    app.route("/car")
+        .get(carRest.getCars)
         .post(carRest.postCar);
-    app.route("/car/:id")
+    app.route("/cars/:id")
         .get(carRest.getCar)
         .put(carRest.putCar)
         .delete(carRest.deleteCar);

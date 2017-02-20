@@ -33,12 +33,12 @@ describe('[Cars TEST]', function() {
 
     describe('/GET/:id car', function() {
         it('it should GET a car by the given id', function(done) {
-            let car = new Car({
+            var car = new Car({
                 name: "Clio"
             });
             car.save(function(err, car) {
                 chai.request(server)
-                    .get('/car/' + car._id)
+                    .get('/cars/' + car._id)
                     .end(function(err, res) {
                         res.should.have.status(200);
                         res.body.should.be.a('object');
@@ -49,9 +49,9 @@ describe('[Cars TEST]', function() {
         });
 
         it('it should not GET a car with a invalid id', function(done) {
-            let invalidId = "1234"
+            var invalidId = "1234"
             chai.request(server)
-                .get('/car/' + invalidId)
+                .get('/cars/' + invalidId)
                 .end(function(err, res) {
                     res.should.have.status(404);
                     res.body.should.be.empty;
@@ -62,11 +62,11 @@ describe('[Cars TEST]', function() {
 
     describe('/POST car', function() {
         it('it should POST a car', function(done) {
-            let car = new Car({
+            var car = new Car({
                 name: "Golf"
             });
             chai.request(server)
-                .post('/car')
+                .post('/cars')
                 .send(car)
                 .end(function(err, res) {
                     res.should.have.status(201);
@@ -76,9 +76,9 @@ describe('[Cars TEST]', function() {
                 });
         });
         it('it should not POST a car without name field', function(done) {
-            let car = new Car({});
+            var car = new Car({});
             chai.request(server)
-                .post('/car')
+                .post('/cars')
                 .send(car)
                 .end(function(err, res) {
                     res.should.have.status(400);
@@ -86,12 +86,12 @@ describe('[Cars TEST]', function() {
                 });
         });
         it('it should not POST a car with a repeated name', function(done) {
-            let car = new Car({
+            var car = new Car({
                 name: "Golf"
             });
             car.save(function(err, car) {
                 chai.request(server)
-                    .post('/car')
+                    .post('/cars')
                     .send(car)
                     .end(function(err, res) {
                         Car.find({ name: car.name }, function(err, cars) {
@@ -107,13 +107,13 @@ describe('[Cars TEST]', function() {
 
     describe('/PUT/:id car', function() {
         it('it should UPDATE a car by the given id', function(done) {
-            let car = new Car({
+            var car = new Car({
                 name: "Golf"
             });
             car.save(function(err, car) {
                 car.name = "Clio";
                 chai.request(server)
-                    .put('/car/' + car._id)
+                    .put('/cars/' + car._id)
                     .send(car)
                     .end(function(err, res) {
                         res.should.have.status(200);
@@ -123,10 +123,10 @@ describe('[Cars TEST]', function() {
             });
         });
         it('it should not UPDATE a car by with a repeated name', function(done) {
-            let car = new Car({
+            var car = new Car({
                 name: "Golf"
             });
-            let car2 = new Car({
+            var car2 = new Car({
                 name: "Clio"
             });
 
@@ -134,7 +134,7 @@ describe('[Cars TEST]', function() {
                 car2.save(function(err, car2) {
                     car2.name = "Golf";
                     chai.request(server)
-                        .put('/car/' + car2._id)
+                        .put('/cars/' + car2._id)
                         .send(car2)
                         .end(function(err, res) {
                             res.should.have.status(409);
@@ -145,12 +145,12 @@ describe('[Cars TEST]', function() {
             });
         });
         it('it should not UPDATE a car by with a invalid id', function(done) {
-            let car = new Car({
+            var car = new Car({
                 name: "Golf"
             });
             invalidId = "1234";
             chai.request(server)
-                .put('/car/' + invalidId)
+                .put('/cars/' + invalidId)
                 .send(car)
                 .end(function(err, res) {
                     res.should.have.status(404);
@@ -163,12 +163,12 @@ describe('[Cars TEST]', function() {
 
     describe('/DELETE/:id car', function() {
         it('it should DELETE a car by the given id', function(done) {
-            let car = new Car({
+            var car = new Car({
                 name: "Golf"
             });
             car.save(function(err, car) {
                 chai.request(server)
-                    .delete('/car/' + car._id)
+                    .delete('/cars/' + car._id)
                     .end(function(err, res) {
                         res.should.have.status(200);
                         res.body.should.have.property('name').eql(car.name);
@@ -177,9 +177,9 @@ describe('[Cars TEST]', function() {
             });
         });
         it('it should not DELETE with a invalid id', function(done) {
-            let invalidId = '1234';
+            var invalidId = '1234';
             chai.request(server)
-                .delete('/car/' + invalidId)
+                .delete('/cars/' + invalidId)
                 .end(function(err, res) {
                     res.should.have.status(404);
                     res.body.should.be.empty;
