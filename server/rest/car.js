@@ -3,7 +3,7 @@ var Car = require('../model/car.js');
 
 module.exports = {
 
-    getCars: function(req, res) {
+    getAll: function(req, res) {
         carDAO.getAll(function(err, cars) {
             if (err) {
                 res.status(500).json();
@@ -13,7 +13,7 @@ module.exports = {
         });
     },
 
-    postCar: function(req, res) {
+    create: function(req, res) {
         var newCar = new Car(req.body);
 
         // Check for Bad Request
@@ -34,7 +34,7 @@ module.exports = {
         });
     },
 
-    getCar: function(req, res) {
+    getById: function(req, res) {
         carDAO.getById(req.params.id, function(err, car) {
             if (err) {
                 if (err.name == "CastError") {
@@ -48,7 +48,7 @@ module.exports = {
         })
     },
 
-    putCar: function(req, res) {
+    update: function(req, res) {
         var car = new Car(req.body);
 
         carDAO.update(req.params.id, car, function(err, updatedCar) {
@@ -66,7 +66,7 @@ module.exports = {
         });
     },
 
-    deleteCar: function(req, res) {
+    delete: function(req, res) {
         carDAO.delete(req.params.id, function(err, deletedCar) {
             if (err) {
                 if (err.name == "CastError") {

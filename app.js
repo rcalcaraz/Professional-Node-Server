@@ -1,4 +1,4 @@
-// TODO: Users tests 
+// TODO: daily log
 
 // Load variables and packages
 require('dotenv').config();

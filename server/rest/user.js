@@ -27,9 +27,16 @@ module.exports = {
     },
 
     create: function(req, res) {
+        if (!req.body.name || !req.body.password || !req.body.role) {
+            res.status(400).json();
+        }
         userDAO.create(req.body, function(err, user) {
             if (err) {
-                res.status(500).json();
+                if (err.name == "ValidationError") {
+                    res.status(409).json();
+                } else {
+                    res.status(500).json();
+                }
             } else {
                 res.status(201).json(user);
             }

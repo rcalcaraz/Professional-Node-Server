@@ -3,10 +3,10 @@ var auth = require('../config/auth.js');
 
 module.exports = function(app) {
     app.route("/cars")
-        .get(auth.jwtVerify, carRest.getCars)
-        .post(auth.jwtVerify, carRest.postCar);
+        .get(auth.jwtVerify, carRest.getAll)
+        .post(auth.jwtVerify, carRest.create);
     app.route("/cars/:id")
-        .get(auth.jwtVerify, carRest.getCar)
-        .put(auth.jwtVerify, carRest.putCar)
-        .delete(auth.jwtVerify, auth.isAdmin, carRest.deleteCar);
+        .get(auth.jwtVerify, carRest.getById)
+        .put(auth.jwtVerify, carRest.update)
+        .delete(auth.jwtVerify, auth.isAdmin, carRest.delete);
 }

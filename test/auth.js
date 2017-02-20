@@ -4,7 +4,6 @@ process.env.NODE_ENV = 'test';
 // Load dependencies
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-var Car = require('../server/model/car.js');
 var User = require('../server/model/user.js');
 var chai = require('chai');
 var chaiHttp = require('chai-http');

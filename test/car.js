@@ -94,7 +94,6 @@ describe('[Cars TEST]', function() {
     describe('/GET cars', function() {
 
         it('it should not GET all the cars without a token', function(done) {
-            var invalidToken = "1234";
             chai.request(server)
                 .get('/cars')
                 .end(function(err, res) {
