@@ -1,5 +1,5 @@
 var carRest = require('../rest/car.js');
-var secutiry = require('../config/secutiry.js');
+var secutiry = require('../config/auth.js');
 
 module.exports = function(app) {
     app.route("/cars")

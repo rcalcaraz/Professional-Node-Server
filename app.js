@@ -1,4 +1,5 @@
 // TODO: Change tests to add jsonwebtokens or change middleware for tests
+// TODO: Users tests
 
 // Load variables and packages
 require('dotenv').config();

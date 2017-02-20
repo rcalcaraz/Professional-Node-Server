@@ -6,7 +6,7 @@ module.exports = function(app) {
     app.route("/users")
         .get(userRest.getAll)
         .post(userRest.create);
-    app.route("/user/:id")
+    app.route("/users/:id")
         .get(userRest.getById)
         .delete(userRest.delete);
 }

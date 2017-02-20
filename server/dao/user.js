@@ -15,6 +15,12 @@ module.exports = {
         })
     },
 
+    getByName: function(name, callback) {
+        User.findOne({ name: name }, function(err, user) {
+            callback(err, user);
+        });
+    },
+
     create: function(user, callback) {
         var newUser = new User(user);
         newUser.save(function(err, user) {
