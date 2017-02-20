@@ -13,7 +13,6 @@ var checkPassword = function(name, password, callback) {
 module.exports = {
 
     create: function(req, res) {
-
         if (!req.body.name || !req.body.password) {
             res.status(400).json();
         } else {

@@ -3,7 +3,6 @@ var jwt = require('jsonwebtoken');
 module.exports = {
 
     isAdmin: function(req, res, next) {
-        console.log(req);
         if (req.decoded.user.role.localeCompare('admin') == 0) {
             next();
         } else {
