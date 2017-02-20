@@ -24,8 +24,8 @@ module.exports = {
     },
 
     create: function(user, callback) {
-        var newUser = new User(user);
         bcrypt.hash(user.password, saltRounds, function(err, hash) {
+            var newUser = new User(user);
             newUser.password = hash;
             newUser.save(function(err, user) {
                 callback(err, user);
