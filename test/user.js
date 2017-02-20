@@ -4,6 +4,7 @@ process.env.NODE_ENV = 'test';
 // Load dependencies
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
+var bcrypt = require('bcrypt');
 var User = require('../server/model/user.js');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
@@ -105,12 +106,16 @@ describe('[Users TEST]', function() {
                 .post('/users')
                 .send(user)
                 .end(function(err, res) {
-                    res.should.have.status(201);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('name').eql(user.name);
-                    res.body.should.have.property('password').eql(user.password);
-                    res.body.should.have.property('role').eql(user.role);
-                    done();
+                    bcrypt.compare(user.password, res.body.password, function(err, passCheck) {
+                        if (!err) {
+                            res.should.have.status(201);
+                            res.body.should.be.a('object');
+                            res.body.should.have.property('name').eql(user.name);
+                            res.body.should.have.property('role').eql(user.role);
+                            passCheck.should.be.true;
+                            done();
+                        }
+                    });
                 });
         });
 

@@ -1,12 +1,20 @@
 var jwt = require('jsonwebtoken');
+var bcrypt = require('bcrypt');
 var User = require('../dao/user.js');
 
 var checkPassword = function(name, password, callback) {
     User.getByName(name, function(err, user) {
-        if (!user || (password.localeCompare(user.password) != 0)) {
+        if (!user) {
             err = true;
+            callback(err, user);
+        } else {
+            bcrypt.compare(password, user.password, function(bcryptErr, res) {
+                if (bcryptErr) {
+                    err = true;
+                }
+                callback(err, user);
+            });
         }
-        callback(err, user);
     });
 }
 

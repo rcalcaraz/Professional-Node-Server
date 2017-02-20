@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
 var uniqueValidator = require('mongoose-unique-validator')
 
-// TODO: Bcrypt password
-
 var userSchema = mongoose.Schema({
     name: {
         type: String,

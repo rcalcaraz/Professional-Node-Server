@@ -1,5 +1,7 @@
 // Database Models
 var User = require('../model/user.js');
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 module.exports = {
 
@@ -23,9 +25,13 @@ module.exports = {
 
     create: function(user, callback) {
         var newUser = new User(user);
-        newUser.save(function(err, user) {
-            callback(err, user);
-        })
+        bcrypt.hash(user.password, saltRounds, function(err, hash) {
+            newUser.password = hash;
+            newUser.save(function(err, user) {
+                callback(err, user);
+            });
+        });
+
     },
 
     delete: function(id, callback) {
