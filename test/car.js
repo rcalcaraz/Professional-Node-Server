@@ -1,6 +1,3 @@
-// During the test the env variable is set to test
-process.env.NODE_ENV = 'test';
-
 // Load dependencies
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');

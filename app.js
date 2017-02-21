@@ -1,3 +1,7 @@
+// TODO Path js
+// Prestart, pretest, poststart and posttests cross plataform scripts
+// Set envoirment variables at start
+
 // Load variables and packages
 require('dotenv').config();
 var express = require('express');
