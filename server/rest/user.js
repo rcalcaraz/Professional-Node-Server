@@ -1,4 +1,5 @@
-var userDAO = require('../dao/user.js');
+var path = require('path');
+var userDAO = require(path.join('..', 'dao', 'user.js'));
 
 module.exports = {
 

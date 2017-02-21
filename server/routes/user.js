@@ -1,5 +1,6 @@
-var userRest = require('../rest/user.js');
-var auth = require('../config/auth.js');
+var path = require('path');
+var userRest = require(path.join('..', 'rest', 'user.js'));
+var auth = require(path.join('..', 'config', 'auth.js'));
 
 module.exports = function(app) {
 

@@ -1,5 +1,6 @@
-var carDAO = require('../dao/car.js');
-var Car = require('../model/car.js');
+var path = require('path');
+var carDAO = require(path.join('..', 'dao', 'car.js'));
+var Car = require(path.join('..', 'model', 'car.js'));
 
 module.exports = {
 

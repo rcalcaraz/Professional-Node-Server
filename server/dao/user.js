@@ -1,5 +1,5 @@
-// Database Models
-var User = require('../model/user.js');
+var path = require('path');
+var User = require(path.join('..', 'model', 'user.js'));
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 

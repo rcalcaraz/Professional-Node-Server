@@ -1,10 +1,12 @@
 var morgan = require('morgan');
 var rfs = require('rotating-file-stream');
 var fs = require('fs');
+var path = require('path');
 
 module.exports = function(app) {
     if (process.env.NODE_ENV == 'prod') {
-        var logDirectory = __dirname + '/log';
+        var logDirectory = path.join(__dirname, '..', '..', 'log');
+        console.log(logDirectory);
         fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 
         // create a rotating write stream

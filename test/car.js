@@ -1,12 +1,13 @@
 // Load dependencies
+var path = require('path');
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-var Car = require('../server/model/car.js');
-var User = require('../server/model/user.js');
+var Car = require(path.join('..', 'server', 'model', 'car.js'));
+var User = require(path.join('..', 'server', 'model', 'user.js'));
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var should = chai.should();
-var server = require('../app.js');
+var server = require(path.join('..', 'app.js'));
 
 chai.use(chaiHttp);
 

@@ -1,6 +1,7 @@
 var jwt = require('jsonwebtoken');
+var path = require('path');
 var bcrypt = require('bcrypt');
-var User = require('../dao/user.js');
+var User = require(path.join('..', 'dao', 'user.js'));
 
 var checkPassword = function(name, password, callback) {
     User.getByName(name, function(err, user) {

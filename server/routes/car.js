@@ -1,5 +1,6 @@
-var carRest = require('../rest/car.js');
-var auth = require('../config/auth.js');
+var path = require('path');
+var carRest = require(path.join('..', 'rest', 'car.js'));
+var auth = require(path.join('..', 'config', 'auth.js'));
 
 module.exports = function(app) {
     app.route("/cars")

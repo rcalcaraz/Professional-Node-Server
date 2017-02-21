@@ -2,6 +2,7 @@
 
 // Load variables and packages
 require('dotenv').config();
+var path = require('path');
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
@@ -16,19 +17,20 @@ app.use(methodOverride());
 app.use(express.static('client'));
 
 // Log
-require('./server/config/logger.js')(app);
+require(path.join(__dirname, 'server', 'config', 'logger.js'))(app);
 
 // Database connection
-var db = require('./server/config/database.js')(mongoose);
+var db = require(path.join(__dirname, 'server', 'config', 'Database.js'))(mongoose);
 
 // REST routes
-require('./server/routes/user.js')(app);
-require('./server/routes/car.js')(app);
-require('./server/routes/session')(app);
+
+require(path.join(__dirname, 'server', 'routes', 'user.js'))(app);
+require(path.join(__dirname, 'server', 'routes', 'car.js'))(app);
+require(path.join(__dirname, 'server', 'routes', 'session.js'))(app);
 
 // Routing
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/client/index.html');
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
 
 // Launcher

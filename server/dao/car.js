@@ -1,5 +1,5 @@
-// Database Models
-var Car = require('../model/car.js');
+var path = require('path');
+var Car = require(path.join('..', 'model', 'car.js'));
 
 module.exports = {
 

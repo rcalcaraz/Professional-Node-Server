@@ -7,7 +7,7 @@
         "predev": "mongodb-dataset-generator ./dataset/user_schema.json -n 10 -o ./dataset/user_dataset.json &&  mongodb-dataset-generator ./dataset/car_schema.json -n 10 -o ./dataset/car_dataset.json && mongoimport --db node-mongo-basic-dev --collection user --drop --type json --file ./dataset/user_dataset.json --jsonArray && mongoimport --db node-mongo-basic-dev --collection car --drop --type json --file ./dataset/car_dataset.json --jsonArray",
         "dev": "cross-env NODE_ENV=dev DB_NAME=node-mongo-basic-dev nodemon ./app.js",
         "start": "cross-env NODE_ENV=prod DB_NAME=node-mongo-basic-prod pm2 start ./app.js",
-        "stop": "pm2 stop ./app",
+        "stop": "pm2 stop ./app.js",
         "test": "cross-env NODE_ENV=test DB_NAME=test mocha --reporter list"
     },
     "repository": {
@@ -39,6 +39,7 @@
         "mongoose": "^4.8.4",
         "mongoose-unique-validator": "^1.0.3",
         "morgan": "^1.8.1",
+        "path": "^0.12.7",
         "pm2": "^2.4.0",
         "rotating-file-stream": "^1.1.9"
     },
