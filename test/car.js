@@ -88,6 +88,25 @@ describe('[Cars TEST]', function() {
         });
     });
 
+    // remove all Cars
+    after(function(done) {
+        Car.remove({}, function(err) {
+            if (!err) {
+                done();
+            }
+        });
+    });
+
+    // remove all Users
+    after(function(done) {
+        User.remove({}, function(err) {
+            if (!err) {
+                done();
+            }
+        });
+    });
+
+
     describe('/GET cars', function() {
 
         it('it should not GET all the cars without a token', function(done) {

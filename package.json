@@ -4,10 +4,10 @@
     "description": "Basic Node REST API with Express",
     "main": "app.js",
     "scripts": {
-        "dev": "cross-env NODE_ENV=dev nodemon ./app.js",
-        "start": "cross-env NODE_ENV=prod pm2 start ./app.js",
+        "dev": "cross-env NODE_ENV=dev DB_NAME=node-mongo-basic-dev nodemon ./app.js",
+        "start": "cross-env NODE_ENV=prod DB_NAME=node-mongo-basic-prod pm2 start ./app.js",
         "stop": "pm2 stop ./app",
-        "test": "cross-env NODE_ENV=test mocha"
+        "test": "cross-env NODE_ENV=test DB_NAME=test mocha --reporter list"
     },
     "repository": {
         "type": "git",
@@ -21,7 +21,7 @@
         "rest",
         "javascript"
     ],
-    "author": "Rafael Castillo Alcaraz",
+    "author": "Rafael Castillo Alcaraz <rafaelcastilloalcaraz@gmail.com>",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/rcalcaraz/node-mongo-basic/issues"

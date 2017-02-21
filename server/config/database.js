@@ -1,9 +1,4 @@
-// Check test mode to set the database
-if (process.env.NODE_ENV !== 'test') {
-    var dbName = process.env.DB_NAME;
-} else {
-    var dbName = process.env.DB_TEST_NAME;
-}
+var dbName = process.env.DB_NAME;
 
 // Set database configuration
 var dbHost = process.env.DB_HOST;

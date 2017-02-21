@@ -78,6 +78,15 @@ describe('[Users TEST]', function() {
         });
     });
 
+    // remove all collections
+    after(function(done) {
+        User.remove({}, function(err) {
+            if (!err) {
+                done();
+            }
+        });
+    });
+
     describe('/GET users', function() {
         it('it should not GET all the users without a admin token', function(done) {
             chai.request(server)

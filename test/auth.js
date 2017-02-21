@@ -49,6 +49,15 @@ describe('[Auth TEST]', function() {
         });
     });
 
+    // remove all collections
+    after(function(done) {
+        User.remove({}, function(err) {
+            if (!err) {
+                done();
+            }
+        });
+    });
+
     describe('/POST session', function() {
         it('it should POST a new session and return a valid token by the given stored user', function(done) {
             User.findOne({}, function(err, user) {

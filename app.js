@@ -1,6 +1,4 @@
 // TODO Path js
-// Prestart, pretest, poststart and posttests cross plataform scripts
-// Set envoirment variables at start
 
 // Load variables and packages
 require('dotenv').config();
@@ -14,7 +12,6 @@ var app = express();
 app.use(bodyParser.urlencoded({ 'extended': 'true' })); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(methodOverride());
 app.use(express.static('client'));
 
