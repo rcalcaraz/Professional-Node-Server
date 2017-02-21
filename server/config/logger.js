@@ -11,7 +11,7 @@ module.exports = function(app) {
 
         // create a rotating write stream
         var accessLogStream = rfs('access.log', {
-            interval: '1d', // rotate daily
+            interval: process.env.LOG_ROTATION_DAYS,
             path: logDirectory
         });
 
