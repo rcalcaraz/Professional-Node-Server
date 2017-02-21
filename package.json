@@ -1,15 +1,19 @@
 {
-    "name": "nodem-mongo-basic",
+    "name": "node-mongo-basic",
     "version": "1.0.0",
     "description": "Basic Node REST API with Express",
     "main": "app.js",
     "scripts": {
-        "predev": "mongodb-dataset-generator ./dataset/user_schema.json -n 10 -o ./dataset/user_dataset.json &&  mongodb-dataset-generator ./dataset/car_schema.json -n 10 -o ./dataset/car_dataset.json && mongoimport --db node-mongo-basic-dev --collection user --drop --type json --file ./dataset/user_dataset.json --jsonArray && mongoimport --db node-mongo-basic-dev --collection car --drop --type json --file ./dataset/car_dataset.json --jsonArray",
-        "dev": "cross-env NODE_ENV=dev DB_NAME=node-mongo-basic-dev nodemon ./app.js",
-        "start-cluster": "cross-env NODE_ENV=prod DB_NAME=node-mongo-basic-prod pm2 start -f ./app.js -i max --name=node-mongo-basic -o ./log/access.log -e ./log/error.log",
-        "start": "cross-env NODE_ENV=prod DB_NAME=node-mongo-basic-prod pm2 start -f ./app.js --name=node-mongo-basic -o ./log/access.log -e ./log/error.log",
+        "dataset": "mongodb-dataset-generator ./dataset/user_schema.json -n 10 -o ./dataset/user_dataset.json && mongodb-dataset-generator ./dataset/car_schema.json -n 10 -o ./dataset/car_dataset.json",
+        "import": "mongoimport -u myDeveloper -p pass --authenticationDatabase=node-mongo-basic-dev --db node-mongo-basic-dev --collection user --drop --type json --file ./dataset/user_dataset.json --jsonArray && mongoimport -u myDeveloper -p pass --authenticationDatabase=node-mongo-basic-dev --db node-mongo-basic-dev --collection car --drop --type json --file ./dataset/car_dataset.json --jsonArray",
+        "predev": "npm run -s dataset && npm run -s import",
+        "dev": "cross-env NODE_ENV=dev DB_NAME=node-mongo-basic-dev DB_USER=myDeveloper DB_PASS=pass DB_AUTHENTICATION=node-mongo-basic-dev nodemon ./app.js",
+        "start-cluster": "cross-env NODE_ENV=prod pm2 start -f ./app.js -i max --name=node-mongo-basic -o ./log/access.log -e ./log/error.log",
+        "restart-cluster": "pm2 reload node-mongo-basic",
+        "start": "cross-env NODE_ENV=prod pm2 start -f ./app.js --name=node-mongo-basic -o ./log/access.log -e ./log/error.log",
+        "restart": "pm2 restart node-mongo-basic",
         "stop": "pm2 stop node-mongo-basic",
-        "test": "cross-env NODE_ENV=test DB_NAME=test mocha --reporter list"
+        "test": "cross-env NODE_ENV=test DB_NAME=test DB_USER=myTester DB_PASS=pass DB_AUTHENTICATION=test mocha --reporter list"
     },
     "repository": {
         "type": "git",
