@@ -1,0 +1,6 @@
+{
+    "_id": "{{counter()}}",
+    "name": "{{chance.name()}}",
+    "password": "password",
+    "role": "{{util.sample(['admin', 'user'])}}"
+}

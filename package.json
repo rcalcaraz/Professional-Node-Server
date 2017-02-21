@@ -4,6 +4,7 @@
     "description": "Basic Node REST API with Express",
     "main": "app.js",
     "scripts": {
+        "predev": "mongodb-dataset-generator ./dataset/user_schema.json -n 10 -o ./dataset/user_dataset.json &&  mongodb-dataset-generator ./dataset/car_schema.json -n 10 -o ./dataset/car_dataset.json && mongoimport --db node-mongo-basic-dev --collection user --drop --type json --file ./dataset/user_dataset.json --jsonArray && mongoimport --db node-mongo-basic-dev --collection car --drop --type json --file ./dataset/car_dataset.json --jsonArray",
         "dev": "cross-env NODE_ENV=dev DB_NAME=node-mongo-basic-dev nodemon ./app.js",
         "start": "cross-env NODE_ENV=prod DB_NAME=node-mongo-basic-prod pm2 start ./app.js",
         "stop": "pm2 stop ./app",
@@ -46,6 +47,7 @@
         "chai": "^3.5.0",
         "chai-http": "^3.0.0",
         "mocha": "^3.2.0",
+        "mongodb-dataset-generator": "^1.0.0",
         "nodemon": "^1.11.0"
     }
 }
