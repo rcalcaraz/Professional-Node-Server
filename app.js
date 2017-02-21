@@ -37,7 +37,7 @@ app.get('/', function(req, res) {
 var port = process.env.NODE_PORT;
 
 app.listen(port, function() {
-    console.log("Listening on port: " + port);
+    console.info("Listening on port: " + port);
 });
 
 module.exports = app; // for testing
