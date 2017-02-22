@@ -29,7 +29,7 @@ module.exports = {
                 if (err) {
                     res.status(403).json();
                 } else {
-                    var token = jwt.sign({ user: user }, process.env.JWT_SECRET);
+                    var token = jwt.sign({ user: user }, process.env.npm_package_config_jwt_secret);
                     if (token) {
                         var session = { token: token };
                         res.status(200).json(session);

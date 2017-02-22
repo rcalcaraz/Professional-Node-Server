@@ -1,7 +1,6 @@
 // TODO Path js
 
 // Load variables and packages
-require('dotenv').config();
 var path = require('path');
 var express = require('express');
 var mongoose = require('mongoose');
@@ -34,7 +33,7 @@ app.get('/', function(req, res) {
 });
 
 // Launcher
-var port = process.env.NODE_PORT;
+var port = process.env.npm_package_config_node_port;
 
 app.listen(port, function() {
     console.info("Listening on port: " + port);

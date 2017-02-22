@@ -1,13 +1,22 @@
-const dbName = process.env.DB_NAME;
-
 // Set database configuration
-const dbHost = process.env.DB_HOST;
-const dbPort = process.env.DB_PORT;
-const dbUser = process.env.DB_USER;
-const dbPass = process.env.DB_PASS;
-const dbAuth = process.env.DB_AUTHENTICATION;
+const dbHost = process.env.npm_package_config_db_host;
+const dbPort = process.env.npm_package_config_db_port;
+
 const options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } } };
-const databaseUrl = 'mongodb://' + dbUser + ':' + dbPass + '@' + dbHost + ':' + dbPort + '/' + dbName + '?' + dbAuth;
+
+if (process.env.node_env.localeCompare("test") == 0) {
+    var dbName = process.env.npm_package_config_db_test_name;
+    var databaseUrl = 'mongodb://' + dbHost + ':' + dbPort + '/' + dbName;
+} else if (process.env.node_env.localeCompare("dev") == 0) {
+    var dbName = process.env.npm_package_config_db_dev_name;
+    var databaseUrl = 'mongodb://' + dbHost + ':' + dbPort + '/' + dbName;
+} else {
+    var dbName = process.env.npm_package_config_db_prod_name;
+    var dbUser = process.env.npm_package_config_db_prod_user;
+    var dbPass = process.env.npm_package_config_db_prod_pass;
+    var dbAuth = process.env.npm_package_config_db_prod_authentication;
+    var databaseUrl = 'mongodb://' + dbUser + ':' + dbPass + '@' + dbHost + ':' + dbPort + '/' + dbName + '?' + dbAuth;
+}
 
 module.exports = function(mongoose) {
 

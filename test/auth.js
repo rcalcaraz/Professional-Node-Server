@@ -68,7 +68,7 @@ describe('[Auth TEST]', function() {
                     .end(function(err, res) {
                         res.should.have.status(200);
                         res.body.should.have.property('token');
-                        jwt.verify(res.body.token, process.env.JWT_SECRET, function(err, decoded) {
+                        jwt.verify(res.body.token, process.env.npm_package_config_jwt_secret, function(err, decoded) {
                             should.not.exist(err);
                             done();
                         });

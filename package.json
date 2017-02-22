@@ -1,23 +1,84 @@
 {
-    "name": "node-mongo-basic",
+    "name": "professional-node-server",
     "version": "1.0.0",
-    "description": "Basic Node REST API with Express",
+    "description": "Professional Node server with an API REST example.",
     "main": "app.js",
+    "config": {
+        "app_name": "production-node",
+        "db_dev_name": "develop-db",
+        "db_host": "localhost",
+        "db_port": "27017",
+        "db_prod_name": "production-db",
+        "db_prod_user": "myUser",
+        "db_prod_pass": "pass",
+        "db_prod_authentication": "production-db",
+        "db_test_name": "test",
+        "first_dataset_collection": "user",
+        "first_dataset_elements": 10,
+        "first_dataset_output_path": "./dataset/user_dataset.json",
+        "first_dataset_schema_path": "./dataset/user_schema.json",
+        "log_access_path": "./log/access.log",
+        "log_error_path": "./log/error.log",
+        "log_rotation_days": 1,
+        "jwt_secret": "secret",
+        "node_port": "3000",
+        "node_host": "localhost",
+        "second_dataset_collection": "car",
+        "second_dataset_elements": 10,
+        "second_dataset_schema_path": "./dataset/car_schema.json",
+        "second_dataset_output_path": "./dataset/car_dataset.json"
+    },
     "scripts": {
-        "dataset": "mongodb-dataset-generator ./dataset/user_schema.json -n 10 -o ./dataset/user_dataset.json && mongodb-dataset-generator ./dataset/car_schema.json -n 10 -o ./dataset/car_dataset.json",
-        "import": "mongoimport -u myDeveloper -p pass --authenticationDatabase=node-mongo-basic-dev --db node-mongo-basic-dev --collection user --drop --type json --file ./dataset/user_dataset.json --jsonArray && mongoimport -u myDeveloper -p pass --authenticationDatabase=node-mongo-basic-dev --db node-mongo-basic-dev --collection car --drop --type json --file ./dataset/car_dataset.json --jsonArray",
-        "predev": "npm run -s dataset && npm run -s import",
-        "dev": "cross-env NODE_ENV=dev DB_NAME=node-mongo-basic-dev DB_USER=myDeveloper DB_PASS=pass DB_AUTHENTICATION=node-mongo-basic-dev nodemon ./app.js",
-        "start-cluster": "cross-env NODE_ENV=prod pm2 start -f ./app.js -i max --name=node-mongo-basic -o ./log/access.log -e ./log/error.log",
-        "restart-cluster": "pm2 reload node-mongo-basic",
-        "start": "cross-env NODE_ENV=prod pm2 start -f ./app.js --name=node-mongo-basic -o ./log/access.log -e ./log/error.log",
-        "restart": "pm2 restart node-mongo-basic",
-        "stop": "pm2 stop node-mongo-basic",
-        "test": "cross-env NODE_ENV=test DB_NAME=test DB_USER=myTester DB_PASS=pass DB_AUTHENTICATION=test mocha --reporter list"
+        "dataset-import": "better-npm-run dataset && better-npm-run import",
+        "predev": "npm run dataset-import",
+        "dev": "better-npm-run dev",
+        "start-cluster": "better-npm-run start-cluster",
+        "restart-cluster": "better-npm-run restart-cluster",
+        "prueba": "better-npm-run prueba",
+        "start": "better-npm-run start",
+        "restart": "better-npm-run restart",
+        "stop": "better-npm-run stop",
+        "test": "better-npm-run test"
+    },
+    "betterScripts": {
+        "dataset": {
+            "command": "cross-var mongodb-dataset-generator $npm_package_config_first_dataset_schema_path -n $npm_package_config_first_dataset_elements -o $npm_package_config_first_dataset_output_path && cross-var mongodb-dataset-generator $npm_package_config_second_dataset_schema_path -n $npm_package_config_second_dataset_elements -o $npm_package_config_second_dataset_output_path"
+        },
+        "import": {
+            "command": "cross-var mongoimport --db $npm_package_config_db_dev_name --collection $npm_package_config_first_dataset_collection --drop --type json --file $npm_package_config_first_dataset_output_path --jsonArray && cross-var mongoimport --db $npm_package_config_db_dev_name --collection $npm_package_config_second_dataset_collection --drop --type json --file $npm_package_config_second_dataset_output_path --jsonArray"
+        },
+        "dev": {
+            "command": "nodemon ./app.js",
+            "env": { "node_env": "dev" }
+        },
+        "prueba": {
+            "command": "mongo admin --eval db.getUsers()"
+        },
+        "start": {
+            "command": "cross-env pm2 start -f ./app.js --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
+            "env": { "node_env": "prod" }
+        },
+        "restart": {
+            "command": "pm2 restart $app-name"
+        },
+        "stop": {
+            "command": "pm2 stop production"
+        },
+        "start-cluster": {
+            "command": "cross-env pm2 start -f ./app.js -i max --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
+            "env": { "node_env": "prod" }
+        },
+        "restart-cluster": {
+            "command": "pm2 reload production-db"
+        },
+        "test": {
+            "command": "cross-env mocha --reporter list",
+            "env": { "node_env": "test" }
+        }
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/rcalcaraz/node-mongo-basic.git"
+        "url": "git+https://github.com/rcalcaraz/production-db.git"
     },
     "keywords": [
         "mongo",
@@ -35,9 +96,10 @@
     "homepage": "https://github.com/rcalcaraz/node-mongo-basic#readme",
     "dependencies": {
         "bcrypt": "^1.0.2",
+        "better-npm-run": "0.0.14",
         "body-parser": "^1.16.1",
         "cross-env": "^3.1.4",
-        "dotenv": "^4.0.0",
+        "cross-var": "^1.0.2",
         "express": "^4.14.1",
         "jsonwebtoken": "^7.3.0",
         "method-override": "^2.3.7",
