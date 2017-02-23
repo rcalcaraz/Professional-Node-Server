@@ -1,8 +1,8 @@
 # Professional Node Server
 
-[![Professional Node Server](https://lh5.googleusercontent.com/X28PrEa7sry3Khz4XNIrxrqi54l3_oLiy4fnKBbW4FhLRMM6ijXDMXj7oNR-2tql4P2LeSS8nEhyvQY=w1347-h584)](https://nodesource.com/products/nsolid)
+[![Professional Node Server](https://lh3.googleusercontent.com/BPrBBdE2bXCoKr4htf4L27Fyk-a6fAzcszQTrdB1jKtx9_cHoDpcYeaGuwXvRj7uEzKxnFCGq_HGzy8=w1920-h950)](https://nodesource.com/products/nsolid)
 
-Este proyecto consiste en un servidor NodeJS con todas las funcionalidades básicas necesarias para un desarrollo profesional. Incluye:
+Este proyecto consiste en un servidor NodeJS con todas las funcionalidades básicas necesarias para un desarrollo profesional. Entre sus funcionalidades incluye:
 
   - Arquitectura estructurada en capas.
   - Entornos de desarrollo, producción y test.
@@ -11,154 +11,178 @@ Este proyecto consiste en un servidor NodeJS con todas las funcionalidades bási
   - Generación automática de datasets para desarrollo.
   - Tests de integración automatizados con Mocha y Chai.
   - Seguridad del servidor con JWT, niveles de acceso a la API y rutas estáticas de ExpressJS.
-  - Seguridad y niveles de acceso a la BD.
+  - Seguridad y niveles de acceso a la BD para entornos de producción.
   - Balanceo de carga automático.
   - Implementado para uso multiplataforma.
-  - Logs de acceso, error y monitorización en vivo
+  - Logs de acceso, error y monitorización en vivo.
+ 
+## Índice
+- [Requisitos previos](#requisitos-previos)
+- [Get started](#get-started)
+- [Configuración](#configuracion)
 
-# Requisitos previos
+
+## Requisitos previos
 
 * [Node JS](https://nodejs.org/es/)
 * [Mongo DB](https://docs.mongodb.com/) 
+* Debido al uso del paquete de encriptación [bcrypt](https://www.npmjs.com/package/bcrypt) es necesario instalar las dependencias del paquete [node-gyp](https://github.com/nodejs/node-gyp) (Python 2.x y un compilador de C/C++) puedes ver como hacerlo [aquí](https://github.com/nodejs/node-gyp#installation)
 
-Antes de comenzar debes configurar tu base de datos de MongoDB para aprovechar las medidas de seguridad. Para lograrlo sigue los siguientes pasos:
 
-Arranca el servicio de base de datos sin la configuración de seguridad. Accede a la base de datos *admin* y crea un usuario que permita configurar roles de otros usuarios.
+## Get started
+Clona el proyecto e instala las dependencias ejecutando:
+```sh
+$ npm install
+```
+Arranca un servicio de mongodb
 ```sh
 $ mongod
-$ mongo
-use admin
-db.createUser(
-  {
-    user: "admin",
-    pwd: "admin",
-    roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
-  }
-)
 ```
-> En este tutorial utilizaremos las bases de datos **development-db** para el entorno de producción, **production-db** para el entorno de producción y **test** para ejecutar los tests. Puedes cambiarlas por las bases de datos que consideres oportuno.
-
-Una vez creado este usuario podemos loguearnos con él y crear nuestros usuarios de acceso a la base de datos. 
+Para ejecutar los tests simplementa lanza el comando:
 ```sh
-$ mongo -u "admin" -p "admin" --authenticationDatabase "admin"
-use development-db
-db.createUser(
-  {
-    user: "myDeveloper",
-    pwd: "pass",
-    roles: [ { role: "readWrite", db: "development-db" } ]
-  }
-);
-use production-db
-db.createUser(
+$ npm test
+```
+En el apartado de [entorno de desarrollo](#entorno-de-desarrollo) puedes ver los detalles de la ejecución. Si simplemente quieres lanzar el script ejecuta:
+```sh
+$ npm run dev
+```
+Para lanzar el servidor en un entorno de producción, por motivos de seguridad debes crear un usuario con privilegios en la base de datos y lanzar el servicio *mongod* con el modo de autenticación habilitado. Puedes ver como hacerlo en el apartado de [entorno de producción](#entorno-de-produccion).
+```sh
+$ npm start
+```
+Existen más scripts que puedes ejecutar. Puedes ver los detalles en el aparatdo [scripts](#scripts)
+
+## Configuración
+Toda la configuración necesaria se encuentra centralizada en el package.json. Puedes cambiar la configuración para adaptarla a tus necesidades. En la siguiente tabla puedes ver en detalle el significado de cada una de las variables:
+
+| Variable | Descripción | Valor por defecto |
+| ------ | ------ | ------ |
+| db_dev_name | Nombre de la base de datos para el entorno de desarrollo | develop-db |
+| db_host | Servidor de la base de datos | localhost | 
+| db_port | Puerto de escucha de la base de datos | 27017 |
+| db_prod_name | Nombre de la base de datos para el entorno de producción | production-db |
+| db_prod_user | Usuario de la base de datos para el entorno de producción | myUser |
+| db_prod_pass | Contraseña del usuario de la base de datos para el entorno de producción  | pass |
+| db_prod_authentication | Nombre de la base de datos de autenticación para el entorno de producción | production-db |
+| db_test_name |  Nombre de la base de datos ejecutar los tests | test |
+| first_dataset_collection | Nombre de la primera colección de la que generar datasets en el entorno de desarrollo | user |
+| first_dataset_elements | Número de elementos de la primera colección para ser generados automáticamente en un dataset en el entorno de desarrollo | 10 |
+| first_dataset_output_path | Ruta del archivo para almacenar el dataset de la primera colección | ./dataset/user_dataset.json |
+| first_dataset_schema_path | Ruta del archivo donde se encuentra el esquema para generar un dataset de la primera colección  | ./dataset/user_schema.json |
+| log_access_path | Ruta para almacenar el log de accesos en el entorno de producción | ./log/access.log |
+| log_error_path | Ruta para almacenar el log de errores en el entorno de producción | ./log/error.log |
+| log_rotation_days | Dias para la rotación de logs en el entorno de producción | 1 |
+| jwt_secret | Clave secreta para la generación de jason web tokens | secret |
+| node_port | Puerto por el que escuchará peticiones el servidor | 3000 |
+| node_host | Host donde se albergará el servidor | localhost |
+| second_dataset_collection | Nombre de la segunda colección de la que generar datasets para el entorno de desarrollo  | car |
+| second_dataset_elements | Número de elementos de la segunda colección para ser generados automáticamente en un dataset en el entorno de desarrollo | 10 |
+| second_dataset_schema_path |  Ruta del archivo para almacenar el dataset de la segunda colección | ./dataset/car_schema.json |
+| second_dataset_output_path | Ruta del archivo donde se encuentra el esquema para generar un dataset de la segunda colección | ./dataset/car_dataset.json |
+
+## Entorno de desarrollo
+Puedes lanzar el servidor utilizando el entorno de desarrollo con:
+```sh
+$ npm run dev
+```
+Este comando internamente crea un dataset generado a través de la configuración definida en el package.json. El dataset es generado con el paquete *mongo-dataset-generator*. Puedes comprobar [aquí](https://github.com/mongodb-js/dataset-generator) los detalles sobre como crear esquemas de generación válidos para tu modelo de datos.
+
+El script es lanzado con [nodemon](https://www.npmjs.com/package/nodemon) por lo que el servidor se reiniciará con cada cambio en el código que se guarde. Paralelamente se mostrará por consola un log con las peticiones recibidas por el servidor usando la configuración *dev* del paquete para logs [morgan](https://www.npmjs.com/package/morgan).
+
+Si simplemente quieres generar el dataset e importarlo a tu base de datos pero no lanzar el servidor puedes ejecutar:
+```sh
+$ npm run dataset-import
+```
+
+
+## Entorno de producción
+Para ejecutar este entorno, tu base de datos de producción debe ser contener al usuario y contraseña fijados en la configuración como mínimo con [permisos](https://docs.mongodb.com/manual/reference/built-in-roles/) *readWrite*.
+
+Si no sabes como crear este usuario puedes utilizar el [tutorial oficial](https://docs.mongodb.com/manual/tutorial/enable-authentication/) de *MongoDB*. Para la configuración por defecto del proyecto, desde la consola de mongo logueado como administrador puedes crear el siguiente usuario:
+```sh
+$ mongod --auth &
+$ mongo -u admin -p admin --authenticationDatabase="admin"
+> use production-db
+> db.createUser(
   {
     user: "myUser",
     pwd: "pass",
     roles: [ { role: "readWrite", db: "production-db" } ]
   }
 );
-use test
-db.createUser(
-  {
-    user: "myTester",
-    pwd: "pass",
-    roles: [ { role: "readWrite", db: "test" } ]
-  }
-);
 ```
-Una vez hayas creado los usuarios que permiten acceder con seguridad a las bases de datos relanza el proceso de mongo con las opciones de seguridad habilitadas:
+Recuerda que para ejecutar el servidor en el entorno de producción, debes levantar el servicio de base de datos con la seguridad habilitada:
 ```sh
 $ mongod --auth
 ```
-# Instalación
-Una vez clonado el proyecto sitúate en la raiz e instala todos los paquetes necesarios ejecutando:
+Ya puedes levantar tu servidor con:
 ```sh
-npm install
+$ npm start
 ```
-# Ejecución
-Los scripts de ejcución se describen en el package.json. Existen scripts para una ejecución en entorno de desarrollo, en entorno de producción y para la ejecucion de tests. Todos ellos comparten un archivo .env de configuración que debes editar con tu configuración personal.
+Este comando levanta el proceso utilizando el paquete [pm2](https://www.npmjs.com/package/pm2). Almacena logs rotativos utilizando la configuración fijada en el package.json con el estilo estandar de *Apache*. Puedes ejecutar todos los comandos de *pm2* que consideres necesarios. Por ejemplo, para monitorizar el estado del servidor en tiempo real utiliza:
+```sh
+$ pm2 monit
+```
+![Monitorización](https://lh5.googleusercontent.com/2hxx19wK_E7v4y651viOz-OEMxtOl_k53Gwf4AUFZKRRr58pYshPnleOpCWqTKPXcm0qZ7Dem48YSi0=w1920-h950-rw)
+Si quieres lanzar tu aplicación de manera clusterizada para aprovechar todas las CPUs de tu máquina utiliza:
+```sh
+$ npm start-cluster
+```
+Para parar cualquiera de estas dos ejecuciones (simple o clusterizada) ejecuta:
+```sh
+$ npm stop
+```
+Para eliminar las instancias lanzadas por completo en ambas ejecuciones:
+```sh
+$ npm run delete-all
+```
+Por último para reiniciar el servidor tras haber realizado *npm stop*
+```sh
+$ npm restart
+```
+```sh
+$ npm run restart-cluster
+```
+## Tests
+Para lanzar los tests simplemente debes invocar el siguiente comando:
+```sh
+$ npm test
+```
+Se lanzarán tests automatizados con [mocha](https://www.npmjs.com/package/mocha) y [chai](https://www.npmjs.com/package/chai)
 
-| Variable | Descripción | Valor por defecto |
-| ------ | ------ | ------ |
-| DB_HOST | La IP del Host donde se encuentra la base de datos | localhost |
-| DB_PORT | El puerto de escucha de la base de datos | 27017 | 
-| DB_USER | El nombre de usuario con acceso a la base de datos de producción | myUser |
-| DB_PASS | La contraseña del de usuario con acceso a la base de datos de producción | pass
-| DB_AUTHENTICATION | Nombre de la base de datos de autenticación | production-db |
-| DB_NAME | Nombre de la base de datos de producción | production-db |
-| NODE_PORT | Puerto por el que escuchará el servidor | 3000 |
-| NODE_HOST | IP del Host donde está alojado el servidor | localhost |
-| JWT_SECRET | Palabra secreta par la encriptación de los Tokens | secret |
-| LOG_ROTATION_DAYS | Dias para la rotación de logs | 1 |
+![Tests](https://lh6.googleusercontent.com/lYffGcWgYMbYc81jjQ2JCRm3dLbzQTpPF9whRObvxDTuHBnfyE0G67tS54AmzLdcADqWjD3fAJ5Zph4=w1841-h922-rw)
 
-## Desarrollo
-Para ejecutar el servidor en un entorno de desarrollo lanza exclusivamente el siguiente comando:
-```sh
-npm run dev
-```
+## Arquitectura
+La aplicación se encuentra dividida en varias capas con la intención de promover el bajo acomplamiento de las mismas. A continuación se puede ver un esquema de la misma.
 
-De manera automática antes de la ejecución para desarrollo se lanzan dos scripts, uno para generar un dataset y otro para importarlo en la base de datos.
-```sh
- "predev": "npm run -s dataset && npm run -s import"
-```
-El script que genera el dataset hace uso de los modelos de datos descritos en la carpeta dataset. Puedes cambiar estos modelos para adaptarlos a tus necesidades. [Más info](https://github.com/mongodb-js/dataset-generator)
-```sh
- "dataset": "mongodb-dataset-generator ./dataset/user_schema.json -n 10 -o ./dataset/user_dataset.json && mongodb-dataset-generator ./dataset/car_schema.json -n 10 -o ./dataset/car_dataset.json"
-```
-Una vez generados los datasets estos deben ser importados a la base de datos de desarrollo. Si has utilizado un nombre diferente para el usuario, pass o contraseña de los seguidos en este tutorial **debes sustirlos**.
-```sh
- "import": "mongoimport -u myDeveloper -p pass --authenticationDatabase=development-db --db development-db --collection user --drop --type json --file ./dataset/user_dataset.json --jsonArray && mongoimport -u myDeveloper -p pass --authenticationDatabase=development-db --db development-db --collection car --drop --type json --file ./dataset/car_dataset.json --jsonArray",
-```
-Por último se lanza el script de ejecución para desarrollo. Al igual que en el script anterior **debes sustituir** los nombres de variables de entorno por las variables que hayas utilizado
-```sh
-"dev": "cross-env NODE_ENV=dev DB_NAME=development-db DB_USER=myDeveloper DB_PASS=pass DB_AUTHENTICATION=development-db nodemon ./app.js",
-```
-En este modo de ejecución todos los *logs* son mostrados por consola con la configuración *dev* de [Morgan](https://www.npmjs.com/package/morgan)
+![Arquitectura](https://lh5.googleusercontent.com/raE4s0g7hZYwpXr9auUF90vZ8fEglUMSIB5t3bnypAVyhYTU0LZWfwumKkZK_Ycz93nawV_MG7FvNjI=w1920-h950)
 
-## Producción
-Para lanzar el servidor en un entorno de producción ejecuta:
+## API REST
+El proyecto incluye a modo de ejemplo una API REST completa con los modelos **user** y **car** para mongoose. Parte de estas rutas están protegidas con [Jason Web Tokens](https://www.npmjs.com/package/jsonwebtoken) y niveles de acceso.
+
+El *Content-Type* de todas las peticiones realizadas a la API deben ser *application/x-www-form-urlencoded*
+
+Un ejemplo de la definición de las rutas sería el siguiente:
+
 ```sh
-npm start
+// ./server/routes/car.js
+ app.route("/cars")
+        .get(auth.jwtVerify, carRest.getAll)
+        .post(auth.jwtVerify, carRest.create);
+    app.route("/cars/:id")
+        .get(auth.jwtVerify, carRest.getById)
+        .put(auth.jwtVerify, carRest.update)
+        .delete(auth.jwtVerify, auth.isAdmin, carRest.delete);
 ```
-Puedes reiniciar el servidor lanzando:
-```sh
-npm run restart
-```
-También existe un comando alternativo para lanzar el servidor clusterizándolo automáticamente entre las diferentes *CPUs* con que cuente tu máquina:
-```sh
-npm run start-cluster
-```
-Puedes reiniciar el cluster lanzando:
-```sh
-npm run restart-cluster
-```
-Para parar el en cualquiera de los dos modos:
-```sh
-npm stop
-```
-El entorno de ejecución utiliza [pm2](http://pm2.keymetrics.io/) y puedes hacer uso de cualquier comando de este paquete que te sea de utilidad, por ejemplo puedes ver una pantalla de monitorización completa ejecutando:
-```sh
-pm2 monit
-```
-![Monitor pm2](http://pm2.keymetrics.io/images/pm2-monit.png)]
-Este modo de ejecución guarda logs de error y de acceso en la carpeta logs con estilo tradicional de Apache.
-## Test
-Para lanzar los tests de integración ejecuta:
-```sh
-npm test
-```
-Si has cambiado los nombres de usuarios y bases de datos, debes modificar el script *test* del package.json
-```sh
- "test": "cross-env NODE_ENV=test DB_NAME=test DB_USER=myTester DB_PASS=pass DB_AUTHENTICATION=test mocha --reporter list"
-```
+Las rutas pueden utilizar el *middleware* **auth.jwtVerify** si acceder al recurso necesita enviarse un token válido y **auth.isAdmin** si para tener acceso al recurso el token debe haber sido generado por un usuario con rol de administrador.
+
+Para obtener un token debe realizarse una petición **POST** al endpoint **/session** enviado en el body un usuario válido. Todos los ejemplos de llamadas a la API pueden verse en la colección de [Postman](https://www.getpostman.com/) adjuntada en el proyecto.
+
+
+
 ### Todos
- - Explicar middlewares de seguridad para la API
- - Simplificar Readme
- - Figura con la arquitectura y directorios
- - Crear colección de POSTMan
- - Actualizar git
- - pm2 deployment
+ - Incluir la configuración para despligues automáticos con **pm2**
  
 License
 ----
-MIT 
+[MIT](https://opensource.org/licenses/MIT)

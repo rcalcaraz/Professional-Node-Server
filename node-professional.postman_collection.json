@@ -1,0 +1,391 @@
+{
+	"id": "e58f83da-c418-9bda-4617-373f6eb4a902",
+	"name": "NODE-PROFESSIONAL",
+	"description": "",
+	"order": [
+		"8b6ed090-ee83-e050-c19c-1a856b4bd89a"
+	],
+	"folders": [
+		{
+			"id": "f03eb949-f6ed-b874-f73b-bce6cf02972c",
+			"name": "Cars",
+			"description": "",
+			"order": [
+				"b2f4387f-26d7-d7e5-0222-e9107c042d6a",
+				"4625494f-8ba0-391c-fad9-445215355bc5",
+				"98a29371-3b31-38be-41ad-f795b71b8d03",
+				"608983aa-5eaa-9847-1136-839307c50305",
+				"5bb951f7-0e9d-e458-e94d-ceee411fa329"
+			],
+			"owner": "781021",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902"
+		},
+		{
+			"id": "8399a14e-d3f5-48ce-4390-6cc0427b1bc3",
+			"name": "Session",
+			"description": "",
+			"order": [
+				"cf7cd381-7866-481c-5919-afcaff3a4847"
+			],
+			"owner": "781021"
+		},
+		{
+			"id": "0a39aabc-9148-c359-7dfa-0806404f95ad",
+			"name": "Users",
+			"description": "",
+			"order": [
+				"19a9a3bc-be78-287f-dd76-5623a6bbc80e",
+				"24a419d7-5b46-0054-bdbf-17d2bbdd63a1",
+				"9361b4c5-5291-41bd-b469-f5c0ca38ab9a",
+				"30792b1e-b608-abfc-45c7-6b5b2f1c8fdf"
+			],
+			"owner": "781021",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902"
+		}
+	],
+	"timestamp": 1487858925704,
+	"owner": "781021",
+	"public": false,
+	"requests": [
+		{
+			"id": "19a9a3bc-be78-287f-dd76-5623a6bbc80e",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/users/58aeef4b18f8701c08c465e9",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [
+				{
+					"key": "name",
+					"value": "John Doe",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "pass",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "role",
+					"value": "user",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "GET user",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859569785,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "0a39aabc-9148-c359-7dfa-0806404f95ad"
+		},
+		{
+			"id": "24a419d7-5b46-0054-bdbf-17d2bbdd63a1",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/users",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [
+				{
+					"key": "name",
+					"value": "Volvo",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "GET users",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859497178,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "0a39aabc-9148-c359-7dfa-0806404f95ad"
+		},
+		{
+			"id": "30792b1e-b608-abfc-45c7-6b5b2f1c8fdf",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/users/58aeef4b18f8701c08c465e9",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "DELETE",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [],
+			"dataMode": "urlencoded",
+			"name": "DELETE user",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859594857,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "0a39aabc-9148-c359-7dfa-0806404f95ad"
+		},
+		{
+			"id": "4625494f-8ba0-391c-fad9-445215355bc5",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/cars",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [
+				{
+					"key": "name",
+					"value": "Maggie Fields",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "password",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "GET cars",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859297809,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "f03eb949-f6ed-b874-f73b-bce6cf02972c"
+		},
+		{
+			"id": "5bb951f7-0e9d-e458-e94d-ceee411fa329",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/cars/58aeee9818f8701c08c465e7",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "DELETE",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [
+				{
+					"key": "name",
+					"value": "Volvo",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "DELETE car",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859460161,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "f03eb949-f6ed-b874-f73b-bce6cf02972c"
+		},
+		{
+			"id": "608983aa-5eaa-9847-1136-839307c50305",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/cars/58aeee9818f8701c08c465e7",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "PUT",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [
+				{
+					"key": "name",
+					"value": "Volvo",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "PUT car",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859441453,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "f03eb949-f6ed-b874-f73b-bce6cf02972c"
+		},
+		{
+			"id": "8b6ed090-ee83-e050-c19c-1a856b4bd89a",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"url": "{{URL}}:3000/session",
+			"preRequestScript": null,
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "name",
+					"value": "Maggie Fields",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "password",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1487859273140,
+			"name": "POST Session",
+			"description": "",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"responses": []
+		},
+		{
+			"id": "9361b4c5-5291-41bd-b469-f5c0ca38ab9a",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/users",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [
+				{
+					"key": "name",
+					"value": "John Doe",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "pass",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "role",
+					"value": "user",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "POST user",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859550986,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "0a39aabc-9148-c359-7dfa-0806404f95ad"
+		},
+		{
+			"id": "98a29371-3b31-38be-41ad-f795b71b8d03",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/cars",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [
+				{
+					"key": "name",
+					"value": "Golf",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "POST car",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859368618,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "f03eb949-f6ed-b874-f73b-bce6cf02972c"
+		},
+		{
+			"id": "b2f4387f-26d7-d7e5-0222-e9107c042d6a",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/cars/58aeee9818f8701c08c465e7",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [
+				{
+					"key": "name",
+					"value": "Golf",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "GET car",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859410955,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "f03eb949-f6ed-b874-f73b-bce6cf02972c"
+		},
+		{
+			"id": "cf7cd381-7866-481c-5919-afcaff3a4847",
+			"headers": "Content-Type: application/x-www-form-urlencoded\nx-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJNYWdnaWUgRmllbGRzIiwicGFzc3dvcmQiOiJwYXNzd29yZCIsInJvbGUiOiJhZG1pbiJ9LCJpYXQiOjE0ODc4NTkxODV9.kOA-NQlZ0I2heCXnlFtEZE1LySDIxCEYBpe_2O4UP2Q\n",
+			"url": "{{URL}}:3000/session",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "e58f83da-c418-9bda-4617-373f6eb4a902",
+			"data": [
+				{
+					"key": "name",
+					"value": "Maggie Fields",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "password",
+					"value": "pass",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "POST session",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1487859635584,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "8399a14e-d3f5-48ce-4390-6cc0427b1bc3"
+		}
+	]
+}

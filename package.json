@@ -69,7 +69,7 @@
             "command": "cross-var pm2 stop $npm_package_config_app_name"
         },
         "delete-all": {
-            "command": "pm2 delete all"
+            "command": "cross-var pm2 delete $npm_package_config_app_name"
         },
         "test": {
             "command": "cross-env mocha --reporter list",
