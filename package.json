@@ -1,6 +1,6 @@
 {
     "name": "professional-node-server",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Professional Node server with an API REST example.",
     "main": "app.js",
     "config": {
