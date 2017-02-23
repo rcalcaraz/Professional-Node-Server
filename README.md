@@ -182,7 +182,7 @@ Un ejemplo de la definición de las rutas sería el siguiente:
 ```
 Las rutas pueden utilizar el *middleware* **auth.jwtVerify** si acceder al recurso necesita enviarse un token válido y **auth.isAdmin** si para tener acceso al recurso el token debe haber sido generado por un usuario con rol de administrador.
 
-Para obtener un token debe realizarse una petición **POST** al endpoint **/session** enviado en el body un usuario válido. Todos los ejemplos de llamadas a la API pueden verse en la colección de [Postman](https://www.getpostman.com/) adjuntada en el proyecto.
+Para obtener un token debe realizarse una petición **POST** al endpoint **/session** enviado en el body un usuario válido. Todos los ejemplos de llamadas a la API pueden verse en la colección de [Postman](https://www.getpostman.com/) [adjuntada](https://github.com/rcalcaraz/professional-node-server/blob/master/node-professional.postman_collection.json) en el proyecto.
 
 
 
