@@ -1,6 +1,6 @@
 # Professional Node Server
 
-[![Professional Node Server](http://oi66.tinypic.com/2gy7wy0.jpg)
+![Professional Node Server](http://oi66.tinypic.com/2gy7wy0.jpg)
 
 Este proyecto consiste en un servidor NodeJS con todas las funcionalidades básicas necesarias para un desarrollo profesional. Entre sus funcionalidades incluye:
 
@@ -19,7 +19,7 @@ Este proyecto consiste en un servidor NodeJS con todas las funcionalidades bási
 ## Índice
 - [Requisitos previos](#requisitos-previos)
 - [Get started](#get-started)
-- [Configuración](#configuracion)
+- [Configuración](#configuración)
 - [Entorno de desarrollo](#entorno-de-desarrollo)
 - [Entorno de producción](#entorno-de-producción)
 - [Tests](#tests)
@@ -59,7 +59,7 @@ $ npm start
 Existen más scripts que puedes ejecutar. Puedes ver los detalles en el aparatdo [scripts](#scripts)
 
 ## Configuración
-Toda la configuración necesaria se encuentra centralizada en el package.json. Puedes cambiar la configuración para adaptarla a tus necesidades. En la siguiente tabla puedes ver en detalle el significado de cada una de las variables:
+Toda la configuración necesaria se encuentra centralizada en el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json). Puedes cambiar la configuración para adaptarla a tus necesidades. En la siguiente tabla puedes ver en detalle el significado de cada una de las variables:
 
 | Variable | Descripción | Valor por defecto |
 | ------ | ------ | ------ |
@@ -91,7 +91,7 @@ Puedes lanzar el servidor utilizando el entorno de desarrollo con:
 ```sh
 $ npm run dev
 ```
-Este comando internamente crea un dataset generado a través de la configuración definida en el package.json. El dataset es generado con el paquete *mongo-dataset-generator*. Puedes comprobar [aquí](https://github.com/mongodb-js/dataset-generator) los detalles sobre como crear esquemas de generación válidos para tu modelo de datos.
+Este comando internamente crea un dataset generado a través de la configuración definida en el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json). El dataset es generado con el paquete *mongo-dataset-generator*. Puedes comprobar [aquí](https://github.com/mongodb-js/dataset-generator) los detalles sobre como crear esquemas de generación válidos para tu modelo de datos.
 
 El script es lanzado con [nodemon](https://www.npmjs.com/package/nodemon) por lo que el servidor se reiniciará con cada cambio en el código que se guarde. Paralelamente se mostrará por consola un log con las peticiones recibidas por el servidor usando la configuración *dev* del paquete para logs [morgan](https://www.npmjs.com/package/morgan).
 
@@ -125,7 +125,7 @@ Ya puedes levantar tu servidor con:
 ```sh
 $ npm start
 ```
-Este comando levanta el proceso utilizando el paquete [pm2](https://www.npmjs.com/package/pm2). Almacena logs rotativos utilizando la configuración fijada en el package.json con el estilo estandar de *Apache*. Puedes ejecutar todos los comandos de *pm2* que consideres necesarios. Por ejemplo, para monitorizar el estado del servidor en tiempo real utiliza:
+Este comando levanta el proceso utilizando el paquete [pm2](https://www.npmjs.com/package/pm2). Almacena logs rotativos utilizando la configuración fijada en el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json) con el estilo estandar de *Apache*. Puedes ejecutar todos los comandos de *pm2* que consideres necesarios. Por ejemplo, para monitorizar el estado del servidor en tiempo real utiliza:
 ```sh
 $ pm2 monit
 ```
