@@ -1,6 +1,6 @@
 # Professional Node Server
 
-[![Professional Node Server](https://lh3.googleusercontent.com/BPrBBdE2bXCoKr4htf4L27Fyk-a6fAzcszQTrdB1jKtx9_cHoDpcYeaGuwXvRj7uEzKxnFCGq_HGzy8=w1920-h950)](https://nodesource.com/products/nsolid)
+[![Professional Node Server](http://oi66.tinypic.com/2gy7wy0.jpg)
 
 Este proyecto consiste en un servidor NodeJS con todas las funcionalidades básicas necesarias para un desarrollo profesional. Entre sus funcionalidades incluye:
 
@@ -20,6 +20,12 @@ Este proyecto consiste en un servidor NodeJS con todas las funcionalidades bási
 - [Requisitos previos](#requisitos-previos)
 - [Get started](#get-started)
 - [Configuración](#configuracion)
+- [Entorno de desarrollo](#entorno-de-desarrollo)
+- [Entorno de producción](#entorno-de-producción)
+- [Tests](#tests)
+- [Arquitectura](#arquitectura)
+- [API REST](#api-rest)
+- [License](#license)
 
 
 ## Requisitos previos
@@ -123,7 +129,7 @@ Este comando levanta el proceso utilizando el paquete [pm2](https://www.npmjs.co
 ```sh
 $ pm2 monit
 ```
-![Monitorización](https://lh5.googleusercontent.com/2hxx19wK_E7v4y651viOz-OEMxtOl_k53Gwf4AUFZKRRr58pYshPnleOpCWqTKPXcm0qZ7Dem48YSi0=w1920-h950-rw)
+![Monitorización](http://oi63.tinypic.com/ehgkma.jpg)
 Si quieres lanzar tu aplicación de manera clusterizada para aprovechar todas las CPUs de tu máquina utiliza:
 ```sh
 $ npm start-cluster
@@ -150,12 +156,12 @@ $ npm test
 ```
 Se lanzarán tests automatizados con [mocha](https://www.npmjs.com/package/mocha) y [chai](https://www.npmjs.com/package/chai)
 
-![Tests](https://lh6.googleusercontent.com/lYffGcWgYMbYc81jjQ2JCRm3dLbzQTpPF9whRObvxDTuHBnfyE0G67tS54AmzLdcADqWjD3fAJ5Zph4=w1841-h922-rw)
+![Tests](http://oi68.tinypic.com/9k04s6.jpg)
 
 ## Arquitectura
 La aplicación se encuentra dividida en varias capas con la intención de promover el bajo acomplamiento de las mismas. A continuación se puede ver un esquema de la misma.
 
-![Arquitectura](https://lh5.googleusercontent.com/raE4s0g7hZYwpXr9auUF90vZ8fEglUMSIB5t3bnypAVyhYTU0LZWfwumKkZK_Ycz93nawV_MG7FvNjI=w1920-h950)
+![Arquitectura](http://oi68.tinypic.com/9rjcdx.jpg)
 
 ## API REST
 El proyecto incluye a modo de ejemplo una API REST completa con los modelos **user** y **car** para mongoose. Parte de estas rutas están protegidas con [Jason Web Tokens](https://www.npmjs.com/package/jsonwebtoken) y niveles de acceso.
@@ -183,6 +189,6 @@ Para obtener un token debe realizarse una petición **POST** al endpoint **/sess
 ### Todos
  - Incluir la configuración para despligues automáticos con **pm2**
  
-License
+### License
 ----
 [MIT](https://opensource.org/licenses/MIT)
