@@ -32,12 +32,12 @@
         "dataset-import": "better-npm-run dataset && better-npm-run import",
         "predev": "npm run dataset-import",
         "dev": "better-npm-run dev",
-        "start-cluster": "better-npm-run start-cluster",
-        "restart-cluster": "better-npm-run restart-cluster",
-        "prueba": "better-npm-run prueba",
         "start": "better-npm-run start",
+        "start-cluster": "better-npm-run start-cluster",
         "restart": "better-npm-run restart",
+        "restart-cluster": "better-npm-run restart-cluster",
         "stop": "better-npm-run stop",
+        "delete-all": "better-npm-run delete-all",
         "test": "better-npm-run test"
     },
     "betterScripts": {
@@ -48,28 +48,28 @@
             "command": "cross-var mongoimport --db $npm_package_config_db_dev_name --collection $npm_package_config_first_dataset_collection --drop --type json --file $npm_package_config_first_dataset_output_path --jsonArray && cross-var mongoimport --db $npm_package_config_db_dev_name --collection $npm_package_config_second_dataset_collection --drop --type json --file $npm_package_config_second_dataset_output_path --jsonArray"
         },
         "dev": {
-            "command": "nodemon ./app.js",
+            "command": "nodemon app.js",
             "env": { "node_env": "dev" }
         },
-        "prueba": {
-            "command": "mongo admin --eval db.getUsers()"
-        },
         "start": {
-            "command": "cross-env pm2 start -f ./app.js --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
+            "command": "cross-var pm2 start app.js --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
+            "env": { "node_env": "prod" }
+        },
+        "start-cluster": {
+            "command": "cross-var pm2 start app.js -i max --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
             "env": { "node_env": "prod" }
         },
         "restart": {
-            "command": "pm2 restart $app-name"
-        },
-        "stop": {
-            "command": "pm2 stop production"
-        },
-        "start-cluster": {
-            "command": "cross-env pm2 start -f ./app.js -i max --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
-            "env": { "node_env": "prod" }
+            "command": "cross-var pm2 restart $npm_package_config_app_name"
         },
         "restart-cluster": {
-            "command": "pm2 reload production-db"
+            "command": "cross-var pm2 reload $npm_package_config_app_name"
+        },
+        "stop": {
+            "command": "cross-var pm2 stop $npm_package_config_app_name"
+        },
+        "delete-all": {
+            "command": "pm2 delete all"
         },
         "test": {
             "command": "cross-env mocha --reporter list",

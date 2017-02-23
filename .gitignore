@@ -1,3 +1,5 @@
 node_modules/
 log/
+dataset/car_dataset.json
+dataset/user_dataset.json
 npm-debug.log

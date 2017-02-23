@@ -153,13 +153,9 @@ Si has cambiado los nombres de usuarios y bases de datos, debes modificar el scr
 ```
 ### Todos
  - Explicar middlewares de seguridad para la API
- - Añadir created_at y updated_at a los modelos
- - Utilizar variables del .env desde los scripts
- - Automatizar el lanzamiento de mongo y creación de usuarios
  - Simplificar Readme
  - Figura con la arquitectura y directorios
  - Crear colección de POSTMan
- - Actualizar package.json
  - Actualizar git
  - pm2 deployment
  

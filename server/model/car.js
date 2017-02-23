@@ -7,6 +7,11 @@ var carSchema = mongoose.Schema({
         required: true,
         unique: true
     }
+}, {
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
+    }
 });
 
 carSchema.plugin(uniqueValidator);
