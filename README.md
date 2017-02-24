@@ -49,12 +49,15 @@ Si quieres, ejecuta los tests:
 $ npm test
 ```
 Para lanzar el servidor en modo *entorno de desarrollo* ejecuta: 
->En su [apartado](#entorno-de-desarrollo) específico puedes ver los detalles del funcionamiento de este script.
+> En su [apartado](#entorno-de-desarrollo) específico puedes ver los detalles del funcionamiento de este script.
+
 ```sh
 $ npm run dev
 ```
 Para lanzar el servidor en modo *entorno de producción* ejecuta:
+
 > Por motivos de seguridad para utilizar el *entorno de producción* debes crear un usuario con privilegios en la base de datos y lanzar el servicio *mongod* con el modo de autenticación habilitado. Puedes ver como hacerlo en el apartado de [entorno de producción](#entorno-de-produccion).
+
 ```sh
 $ npm start
 ```
@@ -94,7 +97,7 @@ $ npm run dev
 ```
 Además de levantar el servidor, este comando realiza un paso previo en el que genera un dataset para pruebas. Para crear este dataset utiliza la configuración definida en el el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json)
 
->El dataset es generado con el paquete *mongo-dataset-generator*. [Aquí](https://github.com/mongodb-js/dataset-generator) puedes consultar la manera para crear tus propios esquemas para crear un dataset personalizado.
+>El dataset es generado con el paquete *mongo-dataset-generator*. [Aquí](https://github.com/mongodb-js/dataset-generator) puedes consultar la manera de crear tu dataset personalizado.
 
 En este modo el servidor es lanzado con [nodemon](https://www.npmjs.com/package/nodemon) por lo que el servidor se reiniciará con cada cambio en el código que se guarde. 
 
@@ -106,9 +109,12 @@ $ npm run dataset-import
 ```
 
 ## Entorno de producción
-Para ejecutar este entorno, tu base de datos de producción debe ser contener al usuario y contraseña fijados en la configuración como mínimo con [permisos](https://docs.mongodb.com/manual/reference/built-in-roles/) *readWrite*.
+Para lanzar el servidor en el modo *entorno de producción*, debes haber dado de alta al usuario que especifiques en el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json). Este usuario debe tener como mínimo [permisos](https://docs.mongodb.com/manual/reference/built-in-roles/) *readWrite*. 
 
-Si no sabes como crear este usuario puedes utilizar el [tutorial oficial](https://docs.mongodb.com/manual/tutorial/enable-authentication/) de *MongoDB*. Para la configuración por defecto del proyecto, desde la consola de mongo logueado como administrador puedes crear el siguiente usuario:
+> Si no sabes como crear este usuario puedes aprender cómo en la [documentación oficial](https://docs.mongodb.com/manual/tutorial/enable-authentication/) de *MongoDB*. 
+
+Utilizando la configuración por defecto de este proyecto, podrías crear un usuario de la siguiente manera:
+
 ```sh
 $ mongod --auth &
 $ mongo -u admin -p admin --authenticationDatabase="admin"
@@ -121,15 +127,19 @@ $ mongo -u admin -p admin --authenticationDatabase="admin"
   }
 );
 ```
-Recuerda que para ejecutar el servidor en el entorno de producción, debes levantar el servicio de base de datos con la seguridad habilitada:
+Recuerda que para ejecutar el servidor en el modo *entorno de producción*, debes levantar el servicio de base de datos con la seguridad habilitada:
 ```sh
 $ mongod --auth
 ```
-Ya puedes levantar tu servidor con:
+Si tu base de datos está configurada correctamente, puedes lanzar el servidor ejecutando:
 ```sh
 $ npm start
 ```
-Este comando levanta el proceso utilizando el paquete [pm2](https://www.npmjs.com/package/pm2). Almacena logs rotativos utilizando la configuración fijada en el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json) con el estilo estandar de *Apache*. Puedes ejecutar todos los comandos de *pm2* que consideres necesarios. Por ejemplo, para monitorizar el estado del servidor en tiempo real utiliza:
+
+>Este comando levanta el proceso utilizando el paquete [pm2](https://www.npmjs.com/package/pm2) y almacena logs rotativos utilizando la configuración fijada en el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json) con el estilo estandar de *Apache*. 
+
+Puedes ejecutar todos los comandos de *pm2* que consideres necesarios. Por ejemplo, para monitorizar el estado del servidor en tiempo real utiliza:
+
 ```sh
 $ pm2 monit
 ```
@@ -138,15 +148,15 @@ Si quieres lanzar tu aplicación de manera clusterizada para aprovechar todas la
 ```sh
 $ npm start-cluster
 ```
-Para parar cualquiera de estas dos ejecuciones (simple o clusterizada) ejecuta:
+Para pausar cualquier ejecución:
 ```sh
 $ npm stop
 ```
-Para eliminar las instancias lanzadas por completo en ambas ejecuciones:
+Para eliminar todas las instancias lanzadas:
 ```sh
 $ npm run delete-all
 ```
-Por último para reiniciar el servidor tras haber realizado *npm stop*
+Para reiniciar el servidor (tras haber realizado *npm stop*)
 ```sh
 $ npm restart
 ```
@@ -163,16 +173,12 @@ Se lanzarán tests automatizados con [mocha](https://www.npmjs.com/package/mocha
 ![Tests](http://oi68.tinypic.com/9k04s6.jpg)
 
 ## Arquitectura
-La aplicación se encuentra dividida en varias capas con la intención de promover el bajo acomplamiento de las mismas. A continuación se puede ver un esquema de la misma.
+La aplicación se encuentra dividida en varias capas con la intención de promover el bajo acomplamiento. A continuación se puede ver un esquema del sistema.
 
 ![Arquitectura](http://oi68.tinypic.com/9rjcdx.jpg)
 
 ## API REST
-El proyecto incluye a modo de ejemplo una API REST completa con los modelos **user** y **car** para mongoose. Parte de estas rutas están protegidas con [Jason Web Tokens](https://www.npmjs.com/package/jsonwebtoken) y niveles de acceso.
-
-El *Content-Type* de todas las peticiones realizadas a la API deben ser *application/x-www-form-urlencoded*
-
-Un ejemplo de la definición de las rutas sería el siguiente:
+El proyecto incluye a modo de ejemplo una API REST completa con los modelos de datos **user** y **car**. Algunos de los *endpoints* se encuentran protegidos con [Jason Web Tokens](https://www.npmjs.com/package/jsonwebtoken) y niveles de acceso. Esta seguridad es implementada a través de *middlewares* como puede verse en el siguiente ejemplo:
 
 ```sh
 // ./server/routes/car.js
@@ -184,11 +190,12 @@ Un ejemplo de la definición de las rutas sería el siguiente:
         .put(auth.jwtVerify, carRest.update)
         .delete(auth.jwtVerify, auth.isAdmin, carRest.delete);
 ```
-Las rutas pueden utilizar el *middleware* **auth.jwtVerify** si acceder al recurso necesita enviarse un token válido y **auth.isAdmin** si para tener acceso al recurso el token debe haber sido generado por un usuario con rol de administrador.
+
+>El *Content-Type* de todas las peticiones realizadas a la API deben ser *application/x-www-form-urlencoded*
+
+Los *endpoints* utilizan el *middleware* **auth.jwtVerify** si para acceder al recurso es necesario enviar un token válido y **auth.isAdmin** si solo es accesible por un usuario con rol de administrador.
 
 Para obtener un token debe realizarse una petición **POST** al endpoint **/session** enviado en el body un usuario válido. Todos los ejemplos de llamadas a la API pueden verse en la colección de [Postman](https://www.getpostman.com/) [adjuntada](https://github.com/rcalcaraz/professional-node-server/blob/master/node-professional.postman_collection.json) en el proyecto.
-
-
 
 ### Todos
  - Incluir la configuración para despligues automáticos con **pm2**
