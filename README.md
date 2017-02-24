@@ -2,7 +2,7 @@
 
 ![Professional Node Server](http://oi66.tinypic.com/2gy7wy0.jpg)
 
-Este proyecto consiste en un servidor NodeJS con todas las funcionalidades básicas necesarias para un desarrollo profesional. Entre sus funcionalidades incluye:
+*Proffesional Node Server* en un servidor NodeJS con todas las funcionalidades necesarias para un desarrollo profesional. Entre sus funcionalidades incluye:
 
   - Arquitectura estructurada en capas.
   - Entornos de desarrollo, producción y test.
@@ -11,9 +11,9 @@ Este proyecto consiste en un servidor NodeJS con todas las funcionalidades bási
   - Generación automática de datasets para desarrollo.
   - Tests de integración automatizados con Mocha y Chai.
   - Seguridad del servidor con JWT, niveles de acceso a la API y rutas estáticas de ExpressJS.
-  - Seguridad y niveles de acceso a la BD para entornos de producción.
+  - Seguridad de la BD con niveles de acceso para entornos de producción.
   - Balanceo de carga automático.
-  - Implementado para uso multiplataforma.
+  - Implementación para uso multiplataforma.
   - Logs de acceso, error y monitorización en vivo.
  
 ## Índice
@@ -32,31 +32,32 @@ Este proyecto consiste en un servidor NodeJS con todas las funcionalidades bási
 
 * [Node JS](https://nodejs.org/es/)
 * [Mongo DB](https://docs.mongodb.com/) 
-* Debido al uso del paquete de encriptación [bcrypt](https://www.npmjs.com/package/bcrypt) es necesario instalar las dependencias del paquete [node-gyp](https://github.com/nodejs/node-gyp) (Python 2.x y un compilador de C/C++) puedes ver como hacerlo [aquí](https://github.com/nodejs/node-gyp#installation)
+* Debido al uso del paquete de encriptación [bcrypt](https://www.npmjs.com/package/bcrypt) debes instalar las dependencias del paquete [node-gyp](https://github.com/nodejs/node-gyp) (Python 2.x y un compilador de C/C++) puedes ver como hacerlo [aquí](https://github.com/nodejs/node-gyp#installation)
 
 
 ## Get started
-Clona el proyecto e instala las dependencias ejecutando:
+Clona el proyecto e instala las dependencias:
 ```sh
 $ npm install
 ```
-Arranca un servicio de mongodb
+Arranca un servicio de mongodb:
 ```sh
 $ mongod
 ```
-Para ejecutar los tests simplementa lanza el comando:
+Si quieres, ejecuta los tests:
 ```sh
 $ npm test
 ```
-En el apartado de [entorno de desarrollo](#entorno-de-desarrollo) puedes ver los detalles de la ejecución. Si simplemente quieres lanzar el script ejecuta:
+Para lanzar el servidor en modo *entorno de desarrollo* ejecuta: 
+>En su [apartado](#entorno-de-desarrollo) específico puedes ver los detalles del funcionamiento de este script.
 ```sh
 $ npm run dev
 ```
-Para lanzar el servidor en un entorno de producción, por motivos de seguridad debes crear un usuario con privilegios en la base de datos y lanzar el servicio *mongod* con el modo de autenticación habilitado. Puedes ver como hacerlo en el apartado de [entorno de producción](#entorno-de-produccion).
+Para lanzar el servidor en modo *entorno de producción* ejecuta:
+> Por motivos de seguridad para utilizar el *entorno de producción* debes crear un usuario con privilegios en la base de datos y lanzar el servicio *mongod* con el modo de autenticación habilitado. Puedes ver como hacerlo en el apartado de [entorno de producción](#entorno-de-produccion).
 ```sh
 $ npm start
 ```
-Existen más scripts que puedes ejecutar. Puedes ver los detalles en el aparatdo [scripts](#scripts)
 
 ## Configuración
 Toda la configuración necesaria se encuentra centralizada en el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json). Puedes cambiar la configuración para adaptarla a tus necesidades. En la siguiente tabla puedes ver en detalle el significado de cada una de las variables:
@@ -87,19 +88,22 @@ Toda la configuración necesaria se encuentra centralizada en el [package.json](
 | second_dataset_output_path | Ruta del archivo donde se encuentra el esquema para generar un dataset de la segunda colección | ./dataset/car_dataset.json |
 
 ## Entorno de desarrollo
-Puedes lanzar el servidor utilizando el entorno de desarrollo con:
+Para lanzar el servidor en modo *entorno de desarrollo* ejecuta: 
 ```sh
 $ npm run dev
 ```
-Este comando internamente crea un dataset generado a través de la configuración definida en el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json). El dataset es generado con el paquete *mongo-dataset-generator*. Puedes comprobar [aquí](https://github.com/mongodb-js/dataset-generator) los detalles sobre como crear esquemas de generación válidos para tu modelo de datos.
+Además de levantar el servidor, este comando realiza un paso previo en el que genera un dataset para pruebas. Para crear este dataset utiliza la configuración definida en el el [package.json](https://github.com/rcalcaraz/professional-node-server/blob/master/package.json)
 
-El script es lanzado con [nodemon](https://www.npmjs.com/package/nodemon) por lo que el servidor se reiniciará con cada cambio en el código que se guarde. Paralelamente se mostrará por consola un log con las peticiones recibidas por el servidor usando la configuración *dev* del paquete para logs [morgan](https://www.npmjs.com/package/morgan).
+>El dataset es generado con el paquete *mongo-dataset-generator*. [Aquí](https://github.com/mongodb-js/dataset-generator) puedes consultar la manera para crear tus propios esquemas para crear un dataset personalizado.
+
+En este modo el servidor es lanzado con [nodemon](https://www.npmjs.com/package/nodemon) por lo que el servidor se reiniciará con cada cambio en el código que se guarde. 
+
+En este modo además, se mostrará por consola un log con las peticiones recibidas por el servidor usando la configuración *dev* del paquete para logs [morgan](https://www.npmjs.com/package/morgan).
 
 Si simplemente quieres generar el dataset e importarlo a tu base de datos pero no lanzar el servidor puedes ejecutar:
 ```sh
 $ npm run dataset-import
 ```
-
 
 ## Entorno de producción
 Para ejecutar este entorno, tu base de datos de producción debe ser contener al usuario y contraseña fijados en la configuración como mínimo con [permisos](https://docs.mongodb.com/manual/reference/built-in-roles/) *readWrite*.
