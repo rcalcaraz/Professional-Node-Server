@@ -2,7 +2,7 @@
 var path = require('path');
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var User = require(path.join('..', 'server', 'model', 'user.js'));
 var chai = require('chai');
 var chaiHttp = require('chai-http');
@@ -17,7 +17,7 @@ describe('[Users TEST]', function() {
     var adminToken;
 
     // remove users
-    before(function(done) {
+    beforeEach(function(done) {
         User.remove({}, function(err) {
             if (!err) {
                 done();
@@ -25,11 +25,11 @@ describe('[Users TEST]', function() {
         });
     });
 
-    // add one admin
-    before(function(done) {
+    // add one standard user
+    beforeEach(function(done) {
         var user = new User({
             name: 'john',
-            password: "pass",
+            password: bcrypt.hashSync("pass"),
             role: 'user'
         });
         user.save(function(err, user) {
@@ -39,11 +39,11 @@ describe('[Users TEST]', function() {
         });
     });
 
-    // add one standard user
-    before(function(done) {
+    // add one admin
+    beforeEach(function(done) {
         var user = new User({
             name: 'mike',
-            password: "pass",
+            password: bcrypt.hashSync("pass"),
             role: 'admin'
         });
         user.save(function(err, user) {
@@ -67,7 +67,7 @@ describe('[Users TEST]', function() {
     });
 
     // get a admin token 
-    before(function(done) {
+    beforeEach(function(done) {
         User.findOne({ role: 'admin' }, function(err, user) {
             chai.request(server)
                 .post('/session')

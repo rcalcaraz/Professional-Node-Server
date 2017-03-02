@@ -1,6 +1,7 @@
 // Load dependencies
 var path = require('path');
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 mongoose.Promise = require('bluebird');
 var Car = require(path.join('..', 'server', 'model', 'car.js'));
 var User = require(path.join('..', 'server', 'model', 'user.js'));
@@ -18,7 +19,7 @@ describe('[Cars TEST]', function() {
     var adminToken;
 
     // remove users
-    before(function(done) {
+    beforeEach(function(done) {
         User.remove({}, function(err) {
             if (!err) {
                 done();
@@ -27,10 +28,10 @@ describe('[Cars TEST]', function() {
     });
 
     // add one admin
-    before(function(done) {
+    beforeEach(function(done) {
         var user = new User({
             name: 'john',
-            password: "pass",
+            password: bcrypt.hashSync("pass"),
             role: 'user'
         });
         user.save(function(err, user) {
@@ -41,10 +42,10 @@ describe('[Cars TEST]', function() {
     });
 
     // add one standard user
-    before(function(done) {
+    beforeEach(function(done) {
         var user = new User({
             name: 'mike',
-            password: "pass",
+            password: bcrypt.hashSync("pass"),
             role: 'admin'
         });
         user.save(function(err, user) {
@@ -68,7 +69,7 @@ describe('[Cars TEST]', function() {
     });
 
     // get a admin token 
-    before(function(done) {
+    beforeEach(function(done) {
         User.findOne({ role: 'admin' }, function(err, user) {
             chai.request(server)
                 .post('/session')

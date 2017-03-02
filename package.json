@@ -1,120 +1,128 @@
 {
-    "name": "professional-node-server",
-    "version": "1.0.0",
-    "description": "Professional Node server with an API REST example.",
-    "main": "app.js",
-    "config": {
-        "app_name": "production-node",
-        "db_dev_name": "develop-db",
-        "db_host": "localhost",
-        "db_port": "27017",
-        "db_prod_name": "production-db",
-        "db_prod_user": "myUser",
-        "db_prod_pass": "pass",
-        "db_prod_authentication": "production-db",
-        "db_test_name": "test",
-        "first_dataset_collection": "user",
-        "first_dataset_elements": 10,
-        "first_dataset_output_path": "./dataset/user_dataset.json",
-        "first_dataset_schema_path": "./dataset/user_schema.json",
-        "log_access_path": "./log/access.log",
-        "log_error_path": "./log/error.log",
-        "log_rotation_days": 1,
-        "jwt_secret": "secret",
-        "node_port": "3000",
-        "node_host": "localhost",
-        "second_dataset_collection": "car",
-        "second_dataset_elements": 10,
-        "second_dataset_schema_path": "./dataset/car_schema.json",
-        "second_dataset_output_path": "./dataset/car_dataset.json"
+  "name": "professional-node-server",
+  "version": "1.1.0",
+  "description": "Professional Node server with an API REST example.",
+  "main": "app.js",
+  "config": {
+    "app_name": "production-node",
+    "db_dev_name": "develop-db",
+    "db_host": "localhost",
+    "db_port": "27017",
+    "db_prod_name": "production-db",
+    "db_prod_user": "myUser",
+    "db_prod_pass": "pass",
+    "db_prod_authentication": "production-db",
+    "db_test_name": "test",
+    "first_dataset_collection": "user",
+    "first_dataset_elements": 10,
+    "first_dataset_output_path": "./dataset/user_dataset.json",
+    "first_dataset_schema_path": "./dataset/user_schema.json",
+    "log_access_path": "./log/access.log",
+    "log_error_path": "./log/error.log",
+    "log_rotation_days": 1,
+    "jwt_secret": "secret",
+    "node_port": "3000",
+    "node_host": "localhost",
+    "second_dataset_collection": "car",
+    "second_dataset_elements": 10,
+    "second_dataset_schema_path": "./dataset/car_schema.json",
+    "second_dataset_output_path": "./dataset/car_dataset.json"
+  },
+  "scripts": {
+    "dataset-import": "better-npm-run dataset && better-npm-run import",
+    "predev": "npm run dataset-import",
+    "dev": "better-npm-run dev",
+    "start": "better-npm-run start",
+    "start-cluster": "better-npm-run start-cluster",
+    "restart": "better-npm-run restart",
+    "restart-cluster": "better-npm-run restart-cluster",
+    "stop": "better-npm-run stop",
+    "delete-all": "better-npm-run delete-all",
+    "test": "better-npm-run test"
+  },
+  "betterScripts": {
+    "dataset": {
+      "command": "cross-var mongodb-dataset-generator $npm_package_config_first_dataset_schema_path -n $npm_package_config_first_dataset_elements -o $npm_package_config_first_dataset_output_path && cross-var mongodb-dataset-generator $npm_package_config_second_dataset_schema_path -n $npm_package_config_second_dataset_elements -o $npm_package_config_second_dataset_output_path"
     },
-    "scripts": {
-        "dataset-import": "better-npm-run dataset && better-npm-run import",
-        "predev": "npm run dataset-import",
-        "dev": "better-npm-run dev",
-        "start": "better-npm-run start",
-        "start-cluster": "better-npm-run start-cluster",
-        "restart": "better-npm-run restart",
-        "restart-cluster": "better-npm-run restart-cluster",
-        "stop": "better-npm-run stop",
-        "delete-all": "better-npm-run delete-all",
-        "test": "better-npm-run test"
+    "import": {
+      "command": "cross-var mongoimport --db $npm_package_config_db_dev_name --collection $npm_package_config_first_dataset_collection --drop --type json --file $npm_package_config_first_dataset_output_path --jsonArray && cross-var mongoimport --db $npm_package_config_db_dev_name --collection $npm_package_config_second_dataset_collection --drop --type json --file $npm_package_config_second_dataset_output_path --jsonArray"
     },
-    "betterScripts": {
-        "dataset": {
-            "command": "cross-var mongodb-dataset-generator $npm_package_config_first_dataset_schema_path -n $npm_package_config_first_dataset_elements -o $npm_package_config_first_dataset_output_path && cross-var mongodb-dataset-generator $npm_package_config_second_dataset_schema_path -n $npm_package_config_second_dataset_elements -o $npm_package_config_second_dataset_output_path"
-        },
-        "import": {
-            "command": "cross-var mongoimport --db $npm_package_config_db_dev_name --collection $npm_package_config_first_dataset_collection --drop --type json --file $npm_package_config_first_dataset_output_path --jsonArray && cross-var mongoimport --db $npm_package_config_db_dev_name --collection $npm_package_config_second_dataset_collection --drop --type json --file $npm_package_config_second_dataset_output_path --jsonArray"
-        },
-        "dev": {
-            "command": "nodemon app.js",
-            "env": { "node_env": "dev" }
-        },
-        "start": {
-            "command": "cross-var pm2 start app.js --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
-            "env": { "node_env": "prod" }
-        },
-        "start-cluster": {
-            "command": "cross-var pm2 start app.js -i max --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
-            "env": { "node_env": "prod" }
-        },
-        "restart": {
-            "command": "cross-var pm2 restart $npm_package_config_app_name"
-        },
-        "restart-cluster": {
-            "command": "cross-var pm2 reload $npm_package_config_app_name"
-        },
-        "stop": {
-            "command": "cross-var pm2 stop $npm_package_config_app_name"
-        },
-        "delete-all": {
-            "command": "cross-var pm2 delete $npm_package_config_app_name"
-        },
-        "test": {
-            "command": "cross-env mocha --reporter list",
-            "env": { "node_env": "test" }
-        }
+    "dev": {
+      "command": "nodemon app.js",
+      "env": {
+        "node_env": "dev"
+      }
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/rcalcaraz/production-db.git"
+    "start": {
+      "command": "cross-var pm2 start app.js --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
+      "env": {
+        "node_env": "prod"
+      }
     },
-    "keywords": [
-        "mongo",
-        "mongoose",
-        "express",
-        "node",
-        "rest",
-        "javascript"
-    ],
-    "author": "Rafael Castillo Alcaraz <rafaelcastilloalcaraz@gmail.com>",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/rcalcaraz/node-mongo-basic/issues"
+    "start-cluster": {
+      "command": "cross-var pm2 start app.js -i max --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
+      "env": {
+        "node_env": "prod"
+      }
     },
-    "homepage": "https://github.com/rcalcaraz/node-mongo-basic#readme",
-    "dependencies": {
-        "bcrypt": "^1.0.2",
-        "better-npm-run": "0.0.14",
-        "body-parser": "^1.16.1",
-        "cross-env": "^3.1.4",
-        "cross-var": "^1.0.2",
-        "express": "^4.14.1",
-        "jsonwebtoken": "^7.3.0",
-        "method-override": "^2.3.7",
-        "mongoose": "^4.8.4",
-        "mongoose-unique-validator": "^1.0.3",
-        "morgan": "^1.8.1",
-        "path": "^0.12.7",
-        "pm2": "^2.4.0"
+    "restart": {
+      "command": "cross-var pm2 restart $npm_package_config_app_name"
     },
-    "devDependencies": {
-        "bluebird": "^3.4.7",
-        "chai": "^3.5.0",
-        "chai-http": "^3.0.0",
-        "mocha": "^3.2.0",
-        "mongodb-dataset-generator": "^1.0.0",
-        "nodemon": "^1.11.0"
+    "restart-cluster": {
+      "command": "cross-var pm2 reload $npm_package_config_app_name"
+    },
+    "stop": {
+      "command": "cross-var pm2 stop $npm_package_config_app_name"
+    },
+    "delete-all": {
+      "command": "cross-var pm2 delete $npm_package_config_app_name"
+    },
+    "test": {
+      "command": "cross-env mocha --reporter list",
+      "env": {
+        "node_env": "test"
+      }
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcalcaraz/production-db.git"
+  },
+  "keywords": [
+    "mongo",
+    "mongoose",
+    "express",
+    "node",
+    "rest",
+    "javascript"
+  ],
+  "author": "Rafael Castillo Alcaraz <rafaelcastilloalcaraz@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rcalcaraz/node-mongo-basic/issues"
+  },
+  "homepage": "https://github.com/rcalcaraz/node-mongo-basic#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "better-npm-run": "0.0.14",
+    "body-parser": "^1.16.1",
+    "cross-env": "^3.1.4",
+    "cross-var": "^1.0.2",
+    "express": "^4.14.1",
+    "jsonwebtoken": "^7.3.0",
+    "method-override": "^2.3.7",
+    "mongoose": "^4.8.4",
+    "mongoose-unique-validator": "^1.0.3",
+    "morgan": "^1.8.1",
+    "path": "^0.12.7",
+    "pm2": "^2.4.0"
+  },
+  "devDependencies": {
+    "bluebird": "^3.4.7",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0",
+    "mongodb-dataset-generator": "^1.0.0",
+    "nodemon": "^1.11.0"
+  }
 }
