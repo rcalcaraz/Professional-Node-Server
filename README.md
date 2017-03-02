@@ -191,7 +191,9 @@ El proyecto incluye a modo de ejemplo una API REST completa con los modelos de d
         .delete(auth.jwtVerify, auth.isAdmin, carRest.delete);
 ```
 
+
 >El *Content-Type* de todas las peticiones realizadas a la API deben ser *application/x-www-form-urlencoded*
+Para obtener un token debe realizarse una petición **POST** al endpoint **/session** enviado en el body un usuario válido. Todos los ejemplos de llamadas a la API pueden verse en la colección de [Postman](https://www.getpostman.com/) [adjuntada](https://github.com/rcalcaraz/professional-node-server/blob/master/node-professional.postman_collection.json) en el proyecto.
 
 Los *endpoints* utilizan el *middleware* **auth.jwtVerify** si para acceder al recurso es necesario enviar un token válido y **auth.isAdmin** si solo es accesible por un usuario con rol de administrador.
 

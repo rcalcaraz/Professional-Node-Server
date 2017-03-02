@@ -1,7 +1,6 @@
 var path = require('path');
 var User = require(path.join('..', 'model', 'user.js'));
-var bcrypt = require('bcrypt');
-const saltRounds = 10;
+var bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
 
@@ -24,7 +23,7 @@ module.exports = {
     },
 
     create: function(user, callback) {
-        bcrypt.hash(user.password, saltRounds, function(err, hash) {
+        bcrypt.hash(user.password, null, null, function(err, hash) {
             var newUser = new User(user);
             newUser.password = hash;
             newUser.save(function(err, user) {

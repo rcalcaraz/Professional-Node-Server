@@ -20,19 +20,19 @@ module.exports = {
         // Check for Bad Request
         if (!req.body.name) {
             res.status(400).json();
-        }
-
-        carDAO.save(newCar, function(err, car) {
-            if (err) {
-                if (err.name == "ValidationError") {
-                    res.status(409).json();
+        } else {
+            carDAO.save(newCar, function(err, car) {
+                if (err) {
+                    if (err.name == "ValidationError") {
+                        res.status(409).json();
+                    } else {
+                        res.status(500).json();
+                    }
                 } else {
-                    res.status(500).json();
+                    res.status(201).json(car);
                 }
-            } else {
-                res.status(201).json(car);
-            }
-        });
+            });
+        }
     },
 
     getById: function(req, res) {

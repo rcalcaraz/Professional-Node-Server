@@ -1,6 +1,6 @@
 {
     "name": "professional-node-server",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Professional Node server with an API REST example.",
     "main": "app.js",
     "config": {
@@ -49,15 +49,21 @@
         },
         "dev": {
             "command": "nodemon app.js",
-            "env": { "node_env": "dev" }
+            "env": {
+                "node_env": "dev"
+            }
         },
         "start": {
             "command": "cross-var pm2 start app.js --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
-            "env": { "node_env": "prod" }
+            "env": {
+                "node_env": "prod"
+            }
         },
         "start-cluster": {
             "command": "cross-var pm2 start app.js -i max --name=$npm_package_config_app_name -o $npm_package_config_log_access_path -e $npm_package_config_log_error_path",
-            "env": { "node_env": "prod" }
+            "env": {
+                "node_env": "prod"
+            }
         },
         "restart": {
             "command": "cross-var pm2 restart $npm_package_config_app_name"
@@ -72,8 +78,10 @@
             "command": "cross-var pm2 delete $npm_package_config_app_name"
         },
         "test": {
-            "command": "cross-env mocha --reporter list",
-            "env": { "node_env": "test" }
+            "command": "mocha --reporter list",
+            "env": {
+                "node_env": "test"
+            }
         }
     },
     "repository": {
@@ -95,7 +103,7 @@
     },
     "homepage": "https://github.com/rcalcaraz/node-mongo-basic#readme",
     "dependencies": {
-        "bcrypt": "^1.0.2",
+        "bcrypt-nodejs": "0.0.3",
         "better-npm-run": "0.0.14",
         "body-parser": "^1.16.1",
         "cross-env": "^3.1.4",

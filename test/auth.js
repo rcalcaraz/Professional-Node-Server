@@ -1,6 +1,7 @@
 // Load dependencies
 var path = require('path');
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt-nodejs');
 mongoose.Promise = require('bluebird');
 var User = require(path.join('..', 'server', 'model', 'user.js'));
 var chai = require('chai');
@@ -26,7 +27,7 @@ describe('[Auth TEST]', function() {
     beforeEach(function(done) {
         var user = new User({
             name: 'john',
-            password: "pass",
+            password: bcrypt.hashSync("pass"),
             role: 'user'
         });
         user.save(function(err, user) {
@@ -40,7 +41,7 @@ describe('[Auth TEST]', function() {
     beforeEach(function(done) {
         var user = new User({
             name: 'mike',
-            password: "pass",
+            password: bcrypt.hashSync("pass"),
             role: 'admin'
         });
         user.save(function(err, user) {

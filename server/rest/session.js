@@ -1,6 +1,6 @@
 var jwt = require('jsonwebtoken');
 var path = require('path');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var User = require(path.join('..', 'dao', 'user.js'));
 
 var checkPassword = function(name, password, callback) {
